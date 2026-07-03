@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -233,3 +234,240 @@
 <script src="../js/main.js"></script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browse Courses — StudyCore Learning Paths</title>
+  <meta name="description" content="Explore comprehensive courses across all subjects. Secondary school, CBU NQ, and university level." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+</head>
+<body>
+
+<!-- ════════ NAVBAR ════════ -->
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/logo.jpg" alt="StudyCore Logo" />
+      <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="courses.html" class="active">Courses</a></li>
+      <li><a href="documents.html">Documents</a></li>
+      <li><a href="arab-ai.html">Arab AI</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="dr-badge">
+        <div class="dr-badge-avatar">DR</div>
+        <span>By Dr. Relentless</span>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="window.location.href='login.html'">Log In</button>
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='signup.html'">Get Started</button>
+    </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../index.html">🏠 Home</a>
+  <a href="about.html">ℹ️ About Us</a>
+  <a href="courses.html">📚 Courses</a>
+  <a href="documents.html">📄 Documents</a>
+  <a href="arab-ai.html">🤖 Arab AI</a>
+  <a href="contact.html">📧 Contact</a>
+  <div class="mobile-actions">
+    <button class="btn btn-outline" onclick="window.location.href='login.html'">Log In</button>
+    <button class="btn btn-primary" onclick="window.location.href='signup.html'">Get Started</button>
+  </div>
+</div>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <h1 class="hero-title">Browse Our Courses</h1>
+      <p class="hero-desc">Comprehensive learning paths across all subjects. Choose your level and dive into world-class education.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ LEVEL TABS ════════ -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div class="level-tabs" style="margin-bottom:40px;">
+      <button class="level-tab active" data-level="all">All Levels</button>
+      <button class="level-tab" data-level="secondary">Secondary School <span class="level-badge">Grade 8–12</span></button>
+      <button class="level-tab" data-level="nq">CBU NQ <span class="level-badge">National Quals</span></button>
+      <button class="level-tab" data-level="university">University <span class="level-badge">Degree Level</span></button>
+    </div>
+
+    <!-- ════════ SUBJECTS GRID ════════ -->
+    <h2 class="section-title" style="margin-top:0;">Select a Subject</h2>
+    <div class="subjects-grid">
+      <a href="subjects/mathematics.html" class="subject-card">
+        <div class="subject-icon">➕</div>
+        <h4>Mathematics</h4>
+        <span>120+ resources</span>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">Algebra, Geometry, Calculus & more</p>
+      </a>
+
+      <a href="subjects/physics.html" class="subject-card">
+        <div class="subject-icon">⚡</div>
+        <h4>Physics</h4>
+        <span>85+ resources</span>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">Mechanics, Waves, Electricity</p>
+      </a>
+
+      <a href="subjects/chemistry.html" class="subject-card">
+        <div class="subject-icon">⚗️</div>
+        <h4>Chemistry</h4>
+        <span>92+ resources</span>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">Organic, Inorganic, Physical</p>
+      </a>
+
+      <a href="subjects/biology.html" class="subject-card">
+        <div class="subject-icon">🌿</div>
+        <h4>Biology</h4>
+        <span>98+ resources</span>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">Cell Biology, Genetics, Ecology</p>
+      </a>
+
+      <a href="subjects/computer-science.html" class="subject-card">
+        <div class="subject-icon">💻</div>
+        <h4>Computer Science</h4>
+        <span>75+ resources</span>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">Programming, Web Dev, Databases</p>
+      </a>
+
+      <a href="subjects/communication-skills.html" class="subject-card">
+        <div class="subject-icon">🗣️</div>
+        <h4>Communication Skills</h4>
+        <span>45+ resources</span>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">English, Writing, Public Speaking</p>
+      </a>
+
+      <a href="subjects/english.html" class="subject-card">
+        <div class="subject-icon">📖</div>
+        <h4>English Language</h4>
+        <span>87+ resources</span>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">Literature, Grammar, Essays</p>
+      </a>
+
+      <a href="subjects/history.html" class="subject-card">
+        <div class="subject-icon">🌍</div>
+        <h4>History & Civics</h4>
+        <span>68+ resources</span>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">African History, Government, Culture</p>
+      </a>
+
+      <a href="subjects/engineering.html" class="subject-card">
+        <div class="subject-icon">🏗️</div>
+        <h4>Engineering (CBU NQ)</h4>
+        <span>52+ resources</span>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">Drawing, Mechanics, Design</p>
+      </a>
+
+      <a href="subjects/business.html" class="subject-card">
+        <div class="subject-icon">📊</div>
+        <h4>Business Studies</h4>
+        <span>64+ resources</span>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">Management, Economics, Accounting</p>
+      </a>
+
+      <a href="subjects/art.html" class="subject-card">
+        <div class="subject-icon">🎨</div>
+        <h4>Art & Design</h4>
+        <span>38+ resources</span>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">Visual Arts, Design Principles</p>
+      </a>
+
+      <a href="subjects/geography.html" class="subject-card">
+        <div class="subject-icon">🗺️</div>
+        <h4>Geography</h4>
+        <span>56+ resources</span>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">Physical, Human, Environmental</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ COURSE STATS ════════ -->
+<section class="section">
+  <div class="container">
+    <div class="stats-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;text-align:center;">
+      <div>
+        <div style="font-size:2.5rem;font-weight:900;color:var(--teal);">500+</div>
+        <p>Study Resources</p>
+      </div>
+      <div>
+        <div style="font-size:2.5rem;font-weight:900;color:var(--navy);">10k+</div>
+        <p>Active Students</p>
+      </div>
+      <div>
+        <div style="font-size:2.5rem;font-weight:900;color:var(--amber);">24/7</div>
+        <p>Arab AI Support</p>
+      </div>
+      <div>
+        <div style="font-size:2.5rem;font-weight:900;color:var(--green);">95%</div>
+        <p>Student Satisfaction</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/logo.jpg" alt="StudyCore" />
+        <p>Empowering African students through quality education and innovative learning technology.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="documents.html">Documents</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul class="footer-links">
+          <li><a href="arab-ai.html">AI Tutor</a></li>
+          <li><a href="videos.html">Videos</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <ul class="footer-links">
+          <li><a href="#">Help Centre</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p>© 2026 StudyCore. All rights reserved.</p>
+        <div class="footer-dr">Website by Dr. Relentless ✦ Stay Curious & Winning</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
+>>>>>>> 1cde29be8ca7e601ebd60d85a4a6e833cfabb80f

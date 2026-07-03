@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,3 +196,202 @@
 <script src="../js/main.js"></script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dashboard — StudyCore</title>
+  <meta name="description" content="Your personal learning dashboard. Track progress, access resources, and manage subscriptions." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+</head>
+<body>
+
+<!-- ════════ NAVBAR ════════ -->
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/logo.jpg" alt="StudyCore Logo" />
+      <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="documents.html">Documents</a></li>
+      <li><a href="arab-ai.html">Arab AI</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn btn-outline btn-sm" onclick="window.location.href='login.html'">Log Out</button>
+    </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ════════ DASHBOARD HEADER ════════ -->
+<section class="section" style="background:linear-gradient(135deg, var(--teal), var(--navy));color:#fff;padding:40px 0;">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+      <div>
+        <h1 style="color:#fff;margin-bottom:8px;">Welcome Back, Student! 👋</h1>
+        <p>Continue your learning journey with StudyCore</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.1);padding:16px 24px;border-radius:12px;border:1px solid rgba(255,255,255,0.2);">
+        <div style="font-size:0.9rem;opacity:0.9;">Current Plan</div>
+        <div style="font-size:1.5rem;font-weight:900;">Pro Student 🌟</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ QUICK STATS ════════ -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div class="stats-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;">
+      <div style="background:#f0fffe;padding:20px;border-radius:12px;border-left:4px solid var(--teal);">
+        <div style="color:var(--text-muted);font-size:0.9rem;">Documents Downloaded</div>
+        <div style="font-size:2rem;font-weight:900;color:var(--teal);margin-top:8px;">24</div>
+      </div>
+      <div style="background:#fffff0;padding:20px;border-radius:12px;border-left:4px solid var(--amber);">
+        <div style="color:var(--text-muted);font-size:0.9rem;">Study Streak</div>
+        <div style="font-size:2rem;font-weight:900;color:var(--amber);margin-top:8px;">12 days 🔥</div>
+      </div>
+      <div style="background:#f0f4ff;padding:20px;border-radius:12px;border-left:4px solid var(--navy);">
+        <div style="color:var(--text-muted);font-size:0.9rem;">Arab AI Chats</div>
+        <div style="font-size:2rem;font-weight:900;color:var(--navy);margin-top:8px;">186</div>
+      </div>
+      <div style="background:#f0fff4;padding:20px;border-radius:12px;border-left:4px solid var(--green);">
+        <div style="color:var(--text-muted);font-size:0.9rem;">Quizzes Completed</div>
+        <div style="font-size:2rem;font-weight:900;color:var(--green);margin-top:8px;">18</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ DASHBOARD GRID ════════ -->
+<section class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+      <!-- Recent Activity -->
+      <div style="background:#fff;padding:24px;border-radius:12px;border:1px solid var(--border);">
+        <h3 style="margin-bottom:16px;">📚 Recent Activity</h3>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="padding:12px;background:#f9fafb;border-radius:8px;border-left:3px solid var(--teal);">
+            <div style="font-weight:600;color:var(--navy);">Viewed: Algebra & Equations Notes</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);">Today at 3:45 PM</div>
+          </div>
+          <div style="padding:12px;background:#f9fafb;border-radius:8px;border-left:3px solid var(--amber);">
+            <div style="font-weight:600;color:var(--navy);">Downloaded: Biology Cell Structure PDF</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);">Yesterday at 7:20 PM</div>
+          </div>
+          <div style="padding:12px;background:#f9fafb;border-radius:8px;border-left:3px solid var(--navy);">
+            <div style="font-weight:600;color:var(--navy);">Watched: Quadratic Formula Video</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);">2 days ago</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved Resources -->
+      <div style="background:#fff;padding:24px;border-radius:12px;border:1px solid var(--border);">
+        <h3 style="margin-bottom:16px;">⭐ Saved Resources</h3>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="padding:12px;background:#f9fafb;border-radius:8px;">
+            <div style="font-weight:600;color:var(--navy);">Mathematics Revision Guide</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);">5 pages • Added 3 weeks ago</div>
+          </div>
+          <div style="padding:12px;background:#f9fafb;border-radius:8px;">
+            <div style="font-weight:600;color:var(--navy);">Physics Past Papers 2023</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);">48 pages • Added 1 month ago</div>
+          </div>
+          <div style="padding:12px;background:#f9fafb;border-radius:8px;">
+            <div style="font-weight:600;color:var(--navy);">Biology Mitosis Video</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);">31:08 min • Added 5 days ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommended Courses -->
+    <div style="background:#fff;padding:24px;border-radius:12px;border:1px solid var(--border);">
+      <h3 style="margin-bottom:16px;">🎓 Recommended for You</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
+        <div style="background:#f9fafb;padding:16px;border-radius:8px;border:1px solid var(--border);cursor:pointer;transition:all 0.3s;">
+          <div style="font-size:2rem;margin-bottom:8px;">➕</div>
+          <h4>Advanced Calculus</h4>
+          <p style="font-size:0.85rem;color:var(--text-muted);">Perfect for your university level</p>
+          <button class="btn btn-primary btn-sm" style="margin-top:12px;width:100%;justify-content:center;">Start Learning</button>
+        </div>
+        <div style="background:#f9fafb;padding:16px;border-radius:8px;border:1px solid var(--border);cursor:pointer;transition:all 0.3s;">
+          <div style="font-size:2rem;margin-bottom:8px;">🧪</div>
+          <h4>Organic Chemistry</h4>
+          <p style="font-size:0.85rem;color:var(--text-muted);">Build on your basics</p>
+          <button class="btn btn-primary btn-sm" style="margin-top:12px;width:100%;justify-content:center;">Start Learning</button>
+        </div>
+        <div style="background:#f9fafb;padding:16px;border-radius:8px;border:1px solid var(--border);cursor:pointer;transition:all 0.3s;">
+          <div style="font-size:2rem;margin-bottom:8px;">💻</div>
+          <h4>Python Programming</h4>
+          <p style="font-size:0.85rem;color:var(--text-muted);">New this month</p>
+          <button class="btn btn-primary btn-sm" style="margin-top:12px;width:100%;justify-content:center;">Start Learning</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ ACCOUNT SECTION ════════ -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">Account Settings</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:800px;">
+      <div style="background:#f9fafb;padding:20px;border-radius:12px;">
+        <h4 style="margin-bottom:12px;">📋 Account Information</h4>
+        <p style="font-size:0.85rem;"><strong>Name:</strong> Bwalya Mwale</p>
+        <p style="font-size:0.85rem;"><strong>Email:</strong> bwalya@email.com</p>
+        <p style="font-size:0.85rem;"><strong>Level:</strong> Grade 12</p>
+        <button class="btn btn-outline btn-sm" style="margin-top:12px;">Edit Profile</button>
+      </div>
+      <div style="background:#f9fafb;padding:20px;border-radius:12px;">
+        <h4 style="margin-bottom:12px;">💳 Subscription</h4>
+        <p style="font-size:0.85rem;"><strong>Plan:</strong> Pro Student</p>
+        <p style="font-size:0.85rem;"><strong>Status:</strong> Active ✓</p>
+        <p style="font-size:0.85rem;"><strong>Renews:</strong> Aug 3, 2026</p>
+        <button class="btn btn-outline btn-sm" style="margin-top:12px;">Manage Subscription</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/logo.jpg" alt="StudyCore" />
+        <p>Empowering African students through quality education.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul class="footer-links">
+          <li><a href="arab-ai.html">AI Tutor</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
+>>>>>>> 1cde29be8ca7e601ebd60d85a4a6e833cfabb80f
