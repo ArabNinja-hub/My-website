@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyCore — Learn Smarter, Achieve More | By Dr. Relentless</title>
+  <meta name="description" content="StudyCore — quality educational documents, video lessons, and Arab AI Tutor for secondary school, CBU NQ and university students." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+</head>
+<body>
+
+<!-- ── TOP ANNOUNCEMENT BAR ── -->
+<div class="top-bar">
+  🎓 <strong>New:</strong> CBU NQ &amp; University resources now live! &nbsp;|&nbsp; 🤖 Meet <strong>Arab</strong> — your AI Study Tutor &nbsp;|&nbsp; ✨ <em>Stay Curious &amp; Winning</em>
+</div>
+
+<!-- ════════ NAVBAR ════════ -->
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="#home" class="nav-brand">
+      <img src="assets/logo.jpg" alt="StudyCore Logo" />
+      <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="pages/courses.html">Courses</a></li>
+      <li><a href="pages/documents.html">Documents</a></li>
+      <li><a href="pages/videos.html">Videos</a></li>
+      <li><a href="pages/arab-ai.html">Arab AI</a></li>
+      <li><a href="pages/about.html">About</a></li>
+      <li><a href="pages/announcements.html">Updates</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="dr-badge">
+        <div class="dr-badge-avatar">DR</div>
+        <span>By Dr. Relentless</span>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="window.location.href='pages/login.html'">Log In</button>
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='pages/signup.html'">Get Started</button>
+    </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">🏠 Home</a>
+  <a href="pages/courses.html">📚 Courses</a>
+  <a href="pages/documents.html">📄 Documents</a>
+  <a href="pages/videos.html">🎬 Videos</a>
+  <a href="pages/arab-ai.html">🤖 Arab AI</a>
+  <a href="pages/about.html">ℹ️ About</a>
+  <a href="pages/contact.html">📧 Contact</a>
+  <a href="pages/announcements.html">📢 Updates</a>
+  <div class="mobile-actions">
+    <button class="btn btn-outline" onclick="window.location.href='pages/login.html'">Log In</button>
+    <button class="btn btn-primary" onclick="window.location.href='pages/signup.html'">Get Started</button>
+  </div>
+</div>
+
+
+<!-- ════════ HERO ════════ -->
+<section id="home" class="hero">
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">🎓 Zambia's Smartest Learning Platform</div>
+      <h1 class="hero-title">Learn Smarter,<br/>Achieve <em>More</em></h1>
+      <p class="hero-desc">Quality documents, video lessons, and Arab — your personal AI tutor. Built for secondary school students, CBU NQ learners, and university students.</p>
+      <div class="curiosity-quote">"Stay Curious &amp; Winning" — Dr. Relentless</div>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="window.location.href='pages/signup.html'">🚀 Start Learning Free</button>
+        <a href="pages/arab-ai.html" class="btn btn-outline">🤖 Chat with Arab</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">500<span>+</span></div><div class="stat-label">Documents</div></div>
+        <div class="stat"><div class="stat-num">10<span>k+</span></div><div class="stat-label">Students</div></div>
+        <div class="stat"><div class="stat-num">CBU <span>NQ</span></div><div class="stat-label">Supported</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-logo-wrap"><img src="assets/logo.jpg" alt="StudyCore" /></div>
+      <div class="floating-card top-right">
+        <span class="icon">🤖</span>
+        <div><div style="font-size:0.75rem;color:var(--text-muted)">AI Tutor</div><div style="color:var(--navy);font-weight:700">Arab is Online</div></div>
+      </div>
+      <div class="floating-card bottom-left">
+        <span class="icon">🏆</span>
+        <div><div style="font-size:0.75rem;color:var(--text-muted)">CBU NQ</div><div style="color:var(--navy);font-weight:700">Resources Live!</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ CBU / UNIVERSITY BANNER ════════ -->
+<div class="cbu-banner">
+  <div class="container cbu-inner">
+    <div class="cbu-badge">
+      <div class="cbu-icon">🎓</div>
+      <h4>CBU NQ</h4>
+      <span>Copperbelt University</span>
+    </div>
+    <div class="cbu-info">
+      <h2>Now Supporting CBU NQ &amp; University Students</h2>
+      <p>StudyCore has expanded! We now provide dedicated resources for Copperbelt University National Qualifications (NQ) students alongside our secondary school content. Get lecture notes, past papers, engineering guides, and business modules — all in one place.</p>
+      <div class="cbu-tags">
+        <span class="cbu-tag">🔧 Engineering</span>
+        <span class="cbu-tag">💼 Business Studies</span>
+        <span class="cbu-tag">💻 ICT / Computing</span>
+        <span class="cbu-tag">🧪 Applied Sciences</span>
+        <span class="cbu-tag">📊 Accounting</span>
+        <span class="cbu-tag">⚖️ Law Fundamentals</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════ FEATURES ════════ -->
+<section id="features" class="features section">
+  <div class="container">
+    <h2 class="section-title">Everything You Need to Excel</h2>
+    <p class="section-sub">StudyCore brings quality resources and intelligent tools together — for every level of student.</p>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">📚</div><h3>Quality Documents</h3><p>Hundreds of curriculum-aligned notes, past papers, and summaries for secondary school, CBU NQ, and university students.</p></div>
+      <div class="feature-card"><div class="feature-icon">🤖</div><h3>Arab — AI Tutor</h3><p>Meet Arab, your always-available AI study tutor. Ask any question across any subject and get clear, patient explanations instantly.</p></div>
+      <div class="feature-card"><div class="feature-icon">🎬</div><h3>Video Lessons</h3><p>Watch expert video lessons uploaded by Dr. Relentless and educators. Pause, rewind, and learn at your own pace.</p></div>
+      <div class="feature-card"><div class="feature-icon">🧠</div><h3>Quick Quizzes</h3><p>Test your knowledge with instant quizzes across multiple subjects. Track your score and identify areas to improve.</p></div>
+      <div class="feature-card"><div class="feature-icon">⏱️</div><h3>Study Tools</h3><p>Built-in Pomodoro timer, scientific calculator, and digital notebook — everything you need in your study session.</p></div>
+      <div class="feature-card"><div class="feature-icon">🎓</div><h3>Multi-Level Support</h3><p>From Grade 8 to Grade 12, CBU NQ, and university degrees — StudyCore covers every academic level in Zambia.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ SUBJECTS ════════ -->
+<section id="subjects" class="section">
+  <div class="container">
+    <h2 class="section-title">Explore Subjects</h2>
+    <p class="section-sub">Comprehensive resources across all subjects — secondary school through university level.</p>
+    <div class="level-tabs">
+      <button class="level-tab active" data-level="all">All Levels</button>
+      <button class="level-tab" data-level="secondary">Secondary School <span class="level-badge">Grade 8–12</span></button>
+      <button class="level-tab" data-level="nq">CBU NQ <span class="level-badge">National Quals</span></button>
+      <button class="level-tab" data-level="university">University <span class="level-badge">Degree Level</span></button>
+    </div>
+    <div class="subjects-grid">
+      <a href="pages/subjects/mathematics.html" class="subject-card"><div class="subject-icon">➕</div><h4>Mathematics</h4><span>120+ docs</span></a>
+      <a href="pages/subjects/physics.html" class="subject-card"><div class="subject-icon">⚡</div><h4>Physics</h4><span>85+ docs</span></a>
+      <a href="pages/subjects/chemistry.html" class="subject-card"><div class="subject-icon">⚗️</div><h4>Chemistry</h4><span>92+ docs</span></a>
+      <a href="pages/subjects/biology.html" class="subject-card"><div class="subject-icon">🌿</div><h4>Biology</h4><span>98+ docs</span></a>
+      <a href="pages/subjects/computer-science.html" class="subject-card"><div class="subject-icon">💻</div><h4>Computer Science</h4><span>75+ docs</span></a>
+      <a href="pages/subjects/communication-skills.html" class="subject-card"><div class="subject-icon">🗣️</div><h4>Communication Skills</h4><span>45+ docs</span></a>
+      <a href="pages/documents.html" class="subject-card"><div class="subject-icon">📖</div><h4>English</h4><span>87+ docs</span></a>
+      <a href="pages/documents.html" class="subject-card"><div class="subject-icon">🌍</div><h4>History &amp; Civics</h4><span>68+ docs</span></a>
+      <a href="pages/documents.html" class="subject-card"><div class="subject-icon">🏗️</div><h4>Engineering (CBU NQ)</h4><span>52+ docs</span></a>
+      <a href="pages/documents.html" class="subject-card"><div class="subject-icon">📊</div><h4>Business Studies</h4><span>64+ docs</span></a>
+      <a href="pages/documents.html" class="subject-card"><div class="subject-icon">🎨</div><h4>Art &amp; Design</h4><span>38+ docs</span></a>
+      <a href="pages/documents.html" class="subject-card"><div class="subject-icon">🗺️</div><h4>Geography</h4><span>56+ docs</span></a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ VIDEO LESSONS ════════ -->
+<section id="videos" class="videos-section section">
+  <div class="container">
+    <h2 class="section-title">Video Lessons</h2>
+    <p class="section-sub">Watch lessons uploaded by Dr. Relentless and expert educators. Upload your own videos below to share with students.</p>
+
+    <div class="videos-grid">
+      <!-- Placeholder video cards -->
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="video-thumb-placeholder">
+            <div class="video-play-btn">▶️</div>
+            <div style="color:rgba(255,255,255,0.6);font-size:0.8rem;font-family:var(--font-display);">Algebra Basics</div>
+          </div>
+          <span class="video-subject-tag">Mathematics</span>
+          <span class="video-duration">24:15</span>
+        </div>
+        <div class="video-body">
+          <h4>Introduction to Quadratic Equations</h4>
+          <p>Understanding ax²+bx+c=0, factoring and the quadratic formula with worked examples.</p>
+          <div class="video-meta"><span>👁 1.2k views</span><span>Dr. Relentless</span></div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="video-thumb-placeholder">
+            <div class="video-play-btn">▶️</div>
+            <div style="color:rgba(255,255,255,0.6);font-size:0.8rem;font-family:var(--font-display);">Cell Biology</div>
+          </div>
+          <span class="video-subject-tag">Biology</span>
+          <span class="video-duration">31:08</span>
+        </div>
+        <div class="video-body">
+          <h4>Cell Structure &amp; Organelles Explained</h4>
+          <p>Visual tour of plant and animal cells, with exam-focused explanations of each organelle.</p>
+          <div class="video-meta"><span>👁 980 views</span><span>Dr. Relentless</span></div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="video-thumb-placeholder">
+            <div class="video-play-btn">▶️</div>
+            <div style="color:rgba(255,255,255,0.6);font-size:0.8rem;font-family:var(--font-display);">NQ Engineering</div>
+          </div>
+          <span class="video-subject-tag">CBU NQ</span>
+          <span class="video-duration">44:52</span>
+        </div>
+        <div class="video-body">
+          <h4>Engineering Drawing Fundamentals (NQ)</h4>
+          <p>Projections, dimensions and tolerances for Copperbelt University NQ Engineering students.</p>
+          <div class="video-meta"><span>👁 640 views</span><span>Dr. Relentless</span></div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="video-thumb-placeholder">
+            <div class="video-play-btn">▶️</div>
+            <div style="color:rgba(255,255,255,0.6);font-size:0.8rem;font-family:var(--font-display);">Essay Writing</div>
+          </div>
+          <span class="video-subject-tag">English</span>
+          <span class="video-duration">18:30</span>
+        </div>
+        <div class="video-body">
+          <h4>Writing A+ Essays — Grade 12 Masterclass</h4>
+          <p>Introduction, body, conclusion structure with model essays and examiner tips.</p>
+          <div class="video-meta"><span>👁 1.8k views</span><span>Dr. Relentless</span></div>
+        </div>
+      </div>
+
+      <!-- Upload Slots -->
+      <div class="video-upload-slot">
+        <input type="file" class="video-upload-input" accept="video/*" />
+        <div class="upload-icon">📤</div>
+        <h4>Upload Your Video Lesson</h4>
+        <p>Click or drag &amp; drop a video file here. MP4, MOV, AVI supported.</p>
+        <button class="btn btn-outline btn-sm" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.3);" onclick="event.stopPropagation();this.closest('.video-upload-slot').querySelector('input').click()">Choose Video</button>
+      </div>
+
+      <div class="video-upload-slot">
+        <input type="file" class="video-upload-input" accept="video/*" />
+        <div class="upload-icon">🎬</div>
+        <h4>Add Another Lesson</h4>
+        <p>Share more video content with your students easily.</p>
+        <button class="btn btn-outline btn-sm" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.3);" onclick="event.stopPropagation();this.closest('.video-upload-slot').querySelector('input').click()">Choose Video</button>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:36px;">
+      <a href="pages/videos.html" class="btn btn-ghost">➕ View All Videos</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ DOCUMENTS ════════ -->
+<section id="documents" class="section" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">Study Documents</h2>
+    <p class="section-sub">Download curriculum-aligned notes, past papers, and revision guides — secondary school through university.</p>
+
+    <div class="doc-filter">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="mathematics">Mathematics</button>
+      <button class="filter-btn" data-filter="science">Science</button>
+      <button class="filter-btn" data-filter="english">English</button>
+      <button class="filter-btn" data-filter="history">History</button>
+      <button class="filter-btn" data-filter="cs">Computer Studies</button>
+      <button class="filter-btn" data-filter="nq">CBU NQ</button>
+      <button class="filter-btn" data-filter="university">University</button>
+    </div>
+
+    <div class="docs-grid">
+      <!-- Secondary School -->
+      <div class="doc-card" data-subject="mathematics" data-level="secondary">
+        <div class="doc-thumb math"><span>➕</span><span class="doc-badge">Grade 12</span></div>
+        <div class="doc-body"><h4>Algebra &amp; Equations Notes</h4><p>Complete notes on linear and quadratic equations with worked examples.</p><div class="doc-meta"><span>📄 24 pages</span><button class="btn btn-primary btn-sm" onclick="showToast('📥 Downloading...','info')">Download</button></div></div>
+      </div>
+      <div class="doc-card" data-subject="mathematics" data-level="secondary">
+        <div class="doc-thumb math"><span>📐</span><span class="doc-badge">Grade 10</span></div>
+        <div class="doc-body"><h4>Geometry &amp; Trigonometry</h4><p>Theorems, proofs and applied problems for circles, triangles and angles.</p><div class="doc-meta"><span>📄 32 pages</span><button class="btn btn-primary btn-sm" onclick="showToast('📥 Downloading...','info')">Download</button></div></div>
+      </div>
+      <div class="doc-card" data-subject="mathematics" data-level="secondary">
+        <div class="doc-thumb math"><span>📊</span><span class="doc-badge">ECZ Past Paper</span></div>
+        <div class="doc-body"><h4>Mathematics Past Papers 2023</h4><p>Full ECZ exam papers with marking schemes and worked solutions.</p><div class="doc-meta"><span>📄 48 pages</span><button class="btn btn-primary btn-sm" onclick="showToast('📥 Downloading...','info')">Download</button></div></div>
+      </div>
+      <div class="doc-card" data-subject="science" data-level="secondary">
+        <div class="doc-thumb science"><span>🔬</span><span class="doc-badge">Grade 11</span></div>
+        <div class="doc-body"><h4>Biology: Cell Structure &amp; Function</h4><p>Detailed notes on cell organelles, mitosis, meiosis and life processes.</p><div class="doc-meta"><span>📄 28 pages</span><button class="btn btn-primary btn-sm" onclick="showToast('📥 Downloading...','info')">Download</button></div></div>
+      </div>
+      <div class="doc-card" data-subject="science" data-level="secondary">
+        <div class="doc-thumb science"><span>⚗️</span><span class="doc-badge">Grade 12</span></div>
+        <div class="doc-body"><h4>Chemistry: Organic Compounds</h4><p>Functional groups, reactions, nomenclature and isomerism explained clearly.</p><div class="doc-meta"><span>📄 36 pages</span><button class="btn btn-primary btn-sm" onclick="showToast('📥 Downloading...','info')">Download</button></div></div>
+      </div>
+      <div class="doc-card" data-subject="english" data-level="secondary">
+        <div class="doc-thumb english"><span>📖</span><span class="doc-badge">Grade 12</span></div>
+        <div class="doc-body"><h4>Essay Writing Masterclass</h4><p>Argumentative, descriptive and narrative essay techniques with model answers.</p><div class="doc-meta"><span>📄 20 pages</span><button class="btn btn-primary btn-sm" onclick="showToast('📥 Downloading...','info')">Download</button></div></div>
+      </div>
+      <div class="doc-card" data-subject="history" data-level="secondary">
+        <div class="doc-thumb history"><span>🌍</span><span class="doc-badge">Grade 12</span></div>
+        <div class="doc-body"><h4>African History Notes</h4><p>Pre-colonial, colonial and post-independence history with key events and figures.</p><div class="doc-meta"><span>📄 40 pages</span><button class="btn btn-primary btn-sm" onclick="showToast('📥 Downloading...','info')">Download</button></div></div>
+      </div>
+      <div class="doc-card" data-subject="cs" data-level="secondary">
+        <div class="doc-thumb cs"><span>💻</span><span class="doc-badge">Grade 12</span></div>
+        <div class="doc-body"><h4>Computer Studies Full Notes</h4><p>Hardware, software, networking, databases and programming fundamentals.</p><div class="doc-meta"><span>📄 55 pages</span><button class="btn btn-primary btn-sm" onclick="showToast('📥 Downloading...','info')">Download</button></div></div>
+      </div>
+      <!-- CBU NQ -->
+      <div class="doc-card" data-subject="nq" data-level="nq">
+        <div class="doc-thumb nq"><span>🏗️</span><span class="doc-badge">CBU NQ</span></div>
+        <div class="doc-body"><h4>Engineering Drawing — NQ Level</h4><p>Orthographic projections, isometric drawing and dimensioning for NQ Engineering.</p><div class="doc-meta"><span>📄 60 pages</span><button class="btn btn-primary btn-sm" onclick="showToast('📥 Downloading...','info')">Download</button></div></div>
+      </div>
+      <div class="doc-card" data-subject="nq" data-level="nq">
+        <div class="doc-thumb nq"><span>📊</span><span class="doc-badge">CBU NQ</span></div>
+        <div class="doc-body"><h4>Business Management NQ Notes</h4><p>Marketing, HR, entrepreneurship and management principles for CBU NQ Business.</p><div class="doc-meta"><span>📄 72 pages</span><button class="btn btn-primary btn-sm" onclick="showToast('📥 Downloading...','info')">Download</button></div></div>
+      </div>
+      <div class="doc-card" data-subject="nq" data-level="nq">
+        <div class="doc-thumb nq"><span>🔌</span><span class="doc-badge">CBU NQ</span></div>
+        <div class="doc-body"><h4>Electrical Engineering Fundamentals</h4><p>AC/DC circuits, transformers, motors and electrical safety for NQ students.</p><div class="doc-meta"><span>📄 65 pages</span><button class="btn btn-primary btn-sm" onclick="showToast('📥 Downloading...','info')">Download</button></div></div>
+      </div>
+      <!-- University -->
+      <div class="doc-card" data-subject="university" data-level="university">
+        <div class="doc-thumb university"><span>🎓</span><span class="doc-badge">University</span></div>
+        <div class="doc-body"><h4>Calculus I — University Notes</h4><p>Limits, derivatives, integration techniques and real-world applications.</p><div class="doc-meta"><span>📄 88 pages</span><button class="btn btn-primary btn-sm" onclick="showToast('📥 Downloading...','info')">Download</button></div></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="pages/documents.html" class="btn btn-outline">📚 View All 500+ Documents →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ ARAB AI TUTOR ════════ -->
+<section id="arab-ai" class="ai-section section">
+  <div class="container">
+    <div class="ai-wrap">
+      <div class="ai-info">
+        <div class="ai-name-display">
+          <div class="ai-dot"></div>
+          <span>Arab</span>
+          <small>StudyCore AI Tutor</small>
+        </div>
+        <h2 style="color:#fff;margin-bottom:16px;">Meet Arab — Your AI Study Tutor</h2>
+        <p>Arab is your brilliant, friendly, and always-patient AI tutor. Ask anything — from Grade 8 Mathematics to CBU NQ Engineering to university-level Calculus. Arab explains it clearly, every time.</p>
+        <ul class="ai-features-list">
+          <li><span class="check">✓</span> Step-by-step solutions for any problem, any subject</li>
+          <li><span class="check">✓</span> Supports Secondary School, CBU NQ &amp; University levels</li>
+          <li><span class="check">✓</span> Patient, encouraging and uses relatable African examples</li>
+          <li><span class="check">✓</span> Available 24/7 — even the night before exams</li>
+          <li><span class="check">✓</span> Always signs off: <em style="color:var(--amber-light)">Stay curious and winning! 🌟</em></li>
+        </ul>
+      </div>
+
+      <!-- Live Chat Widget -->
+      <div class="chat-widget">
+        <div class="chat-header">
+          <div class="chat-avatar">A</div>
+          <div class="chat-header-info">
+            <h4>Arab — AI Study Tutor</h4>
+            <span>Powered by StudyCore AI</span>
+          </div>
+          <div class="online-dot"></div>
+        </div>
+        <div class="chat-quick-prompts">
+          <a href="pages/arab-ai.html" class="quick-prompt" style="display:inline-block;">Ask Arab →</a>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="msg ai">
+            <div class="msg-icon">A</div>
+            <div>
+              <div class="msg-bubble">Salaam! 👋 I'm <strong>Arab</strong>, your StudyCore AI tutor. I'm here to help you with any subject — whether you're in Grade 8, studying for ECZ, doing your CBU NQ, or at university level. What are we learning today?</div>
+              <div class="msg-time">Now</div>
+            </div>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" id="chatInput" class="chat-input" placeholder="Ask Arab anything..." />
+          <button id="chatSend" class="chat-send">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ QUIZ ════════ -->
+<section id="quiz" class="quiz-section section">
+  <div class="container">
+    <h2 class="section-title">Quick Knowledge Quiz</h2>
+    <p class="section-sub">Test yourself across multiple subjects. Instant feedback on every answer.</p>
+    <div class="quiz-card">
+      <div id="quizContent">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+          <span id="quizSubject" style="background:rgba(26,158,143,0.12);color:var(--teal-dark);padding:5px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;font-family:var(--font-display);"></span>
+          <span class="quiz-score" id="quizScore"></span>
+        </div>
+        <div class="quiz-progress"><div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgressFill" style="width:0%"></div></div></div>
+        <div class="quiz-question" id="quizQuestion"></div>
+        <div class="quiz-options" id="quizOptions"></div>
+      </div>
+      <div class="quiz-result" id="quizResult" style="display:none;">
+        <div class="result-emoji" id="resultEmoji"></div>
+        <h3 id="resultScore"></h3>
+        <p id="resultMsg" style="margin-bottom:20px;"></p>
+        <p style="font-family:var(--font-serif);font-style:italic;color:var(--amber);margin-bottom:24px;">"Stay curious and winning!" — Dr. Relentless</p>
+        <button class="btn btn-primary" id="restartQuiz">🔁 Try Again</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ STUDY TOOLS ════════ -->
+<section id="tools" class="tools-section section">
+  <div class="container">
+    <h2 class="section-title">Study Tools</h2>
+    <p class="section-sub">Everything you need for a productive study session, built right into StudyCore.</p>
+    <div class="tools-grid">
+      <!-- Pomodoro Timer -->
+      <div class="tool-card">
+        <h3>⏱️ Study Timer</h3>
+        <p>Use the Pomodoro technique to stay focused. 25 min study, 5 min break.</p>
+        <div class="timer-modes">
+          <button class="timer-mode-btn active" data-mode="pomodoro">Pomodoro</button>
+          <button class="timer-mode-btn" data-mode="short">Short Break</button>
+          <button class="timer-mode-btn" data-mode="long">Long Break</button>
+        </div>
+        <div class="timer-display" id="timerDisplay">25:00</div>
+        <div class="timer-controls">
+          <button class="timer-btn timer-start" id="timerStart">▶ Start</button>
+          <button class="timer-btn timer-pause" id="timerPause">⏸ Pause</button>
+          <button class="timer-btn timer-reset" id="timerReset">↺ Reset</button>
+        </div>
+      </div>
+
+      <!-- Calculator -->
+      <div class="tool-card">
+        <h3>🧮 Calculator</h3>
+        <p>Scientific calculator for your maths and science calculations.</p>
+        <div class="calc-display" id="calcDisplay">0</div>
+        <div class="calc-grid">
+          <button class="calc-btn calc-clear" onclick="calcPress('C')">C</button>
+          <button class="calc-btn calc-op" onclick="calcPress('(')">(</button>
+          <button class="calc-btn calc-op" onclick="calcPress(')')">)</button>
+          <button class="calc-btn calc-op" onclick="calcPress('÷')">÷</button>
+          <button class="calc-btn calc-num" onclick="calcPress('7')">7</button>
+          <button class="calc-btn calc-num" onclick="calcPress('8')">8</button>
+          <button class="calc-btn calc-num" onclick="calcPress('9')">9</button>
+          <button class="calc-btn calc-op" onclick="calcPress('×')">×</button>
+          <button class="calc-btn calc-num" onclick="calcPress('4')">4</button>
+          <button class="calc-btn calc-num" onclick="calcPress('5')">5</button>
+          <button class="calc-btn calc-num" onclick="calcPress('6')">6</button>
+          <button class="calc-btn calc-op" onclick="calcPress('-')">−</button>
+          <button class="calc-btn calc-num" onclick="calcPress('1')">1</button>
+          <button class="calc-btn calc-num" onclick="calcPress('2')">2</button>
+          <button class="calc-btn calc-num" onclick="calcPress('3')">3</button>
+          <button class="calc-btn calc-op" onclick="calcPress('+')">+</button>
+          <button class="calc-btn calc-num" onclick="calcPress('0')" style="grid-column:span 2">0</button>
+          <button class="calc-btn calc-num" onclick="calcPress('.')">.</button>
+          <button class="calc-btn calc-eq" onclick="calcPress('=')">=</button>
+          <button class="calc-btn calc-op" onclick="calcPress('Math.sqrt(')" style="font-size:0.78rem">√</button>
+          <button class="calc-btn calc-op" onclick="calcPress('**2')" style="font-size:0.78rem">x²</button>
+          <button class="calc-btn calc-op" onclick="calcPress('%')">%</button>
+          <button class="calc-btn calc-clear" onclick="calcPress('⌫')" style="font-size:0.85rem">⌫</button>
+        </div>
+      </div>
+
+      <!-- Digital Notes -->
+      <div class="tool-card">
+        <h3>📝 Quick Notes</h3>
+        <p>Jot down key points during your study session. Your notes are saved automatically.</p>
+        <textarea id="notesArea" class="notes-area" placeholder="Type your study notes here... e.g. Key formulas, definitions, or things to remember.
+
+Your notes are saved to this browser automatically."></textarea>
+        <div class="notes-actions">
+          <button class="btn btn-primary btn-sm" id="saveNotes">💾 Save</button>
+          <button class="btn btn-outline btn-sm" id="copyNotes">📋 Copy</button>
+          <button class="btn btn-sm" style="background:rgba(248,113,113,0.1);color:#dc2626;border:none;cursor:pointer;padding:9px 16px;border-radius:50px;font-family:var(--font-display);font-weight:600;font-size:0.85px" id="clearNotes">🗑️ Clear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ TESTIMONIALS ════════ -->
+<section class="testimonials section">
+  <div class="container">
+    <h2 class="section-title">What Our Students Say</h2>
+    <p class="section-sub">Real results from students across Zambia who are learning with StudyCore.</p>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>Arab explained trigonometry better than any teacher I've had. I passed my Grade 12 ECZ with distinction! StudyCore is a game changer.</p>
+        <div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,var(--teal),var(--navy))">T</div><div class="testi-author-info"><h5>Tafadzwa M.</h5><span>Grade 12, Lusaka</span></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>The CBU NQ engineering notes are exactly what I needed. Arab even helped me understand engineering drawing concepts I was struggling with!</p>
+        <div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#F5A623,#e8912a)">B</div><div class="testi-author-info"><h5>Bwalya K.</h5><span>CBU NQ Engineering, Ndola</span></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>As a teacher I recommend StudyCore to all my students. Dr. Relentless has built something truly special. The AI tutor Arab is exceptional.</p>
+        <div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">M</div><div class="testi-author-info"><h5>Mr. Mulenga C.</h5><span>Secondary School Teacher, Kitwe</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ CTA BANNER ════════ -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="cta-quote">"Stay Curious &amp; Winning"</div>
+    <h2 style="margin-bottom:12px;">Ready to Achieve More?</h2>
+    <p>Join thousands of students already winning with StudyCore. Secondary school, CBU NQ, university — all welcome.</p>
+    <div class="cta-banner-btns">
+      <button class="btn btn-amber" onclick="window.location.href='pages/signup.html'">🚀 Create Free Account</button>
+      <a href="pages/arab-ai.html" class="btn btn-ghost">🤖 Chat with Arab</a>
+    </div>
+    <p style="margin-top:32px;font-size:0.82rem;opacity:0.5;">Website by <strong style="opacity:1;color:var(--amber-light)">Dr. Relentless</strong> &nbsp;|&nbsp; StudyCore © 2026</p>
+  </div>
+</section>
+ | <a href="pages/pricing.html" style="color:var(--amber-light);text-decoration:none;">Pricing</a>
+
+<!-- ════════ FOOTER ════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo.jpg" alt="StudyCore" />
+        <p>StudyCore is your trusted learning platform delivering quality educational resources, video lessons, and Arab AI tutoring for students across Africa — from Grade 8 to university.</p>
+        <div style="margin-top:16px;font-family:var(--font-serif);font-style:italic;color:var(--amber);font-size:0.95rem;">"Stay Curious &amp; Winning"</div>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pages/courses.html">Courses</a></li>
+          <li><a href="pages/documents.html">Documents</a></li>
+          <li><a href="pages/videos.html">Videos</a></li>
+          <li><a href="pages/arab-ai.html">Arab AI</a></li>
+          <li><a href="pages/about.html">About</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul class="footer-links">
+          <li><a href="pages/pricing.html">Pricing</a></li>
+          <li><a href="pages/dashboard.html">Dashboard</a></li>
+          <li><a href="pages/announcements.html">Announcements</a></li>
+          <li><a href="pages/contact.html">Contact</a></li>
+          <li><a href="#">Help Centre</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Subjects</h5>
+        <ul class="footer-links">
+          <li><a href="pages/subjects/mathematics.html">Mathematics</a></li>
+          <li><a href="pages/subjects/physics.html">Physics</a></li>
+          <li><a href="pages/subjects/chemistry.html">Chemistry</a></li>
+          <li><a href="pages/subjects/biology.html">Biology</a></li>
+          <li><a href="pages/subjects/computer-science.html">Computer Science</a></li>
+          <li><a href="pages/courses.html">All Courses</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p>© 2026 StudyCore. All rights reserved.</p>
+        <div class="footer-dr">Website by Dr. Relentless ✦ Stay Curious &amp; Winning</div>
+        <div class="social-links">
+          <a href="#" class="social-link">📘</a>
+          <a href="#" class="social-link">🐦</a>
+          <a href="#" class="social-link">📸</a>
+          <a href="#" class="social-link">▶️</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="js/main.js"></script>
+</body>
+</html>
