@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arab AI Study Tutor — Get Instant Answers 24/7</title>
+  <meta name="description" content="Chat with Arab, your personal AI tutor available 24/7. Get instant explanations and study guidance." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+</head>
+<body>
+
+<!-- ════════ NAVBAR ════════ -->
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <img src="../assets/logo.jpg" alt="StudyCore Logo" />
+      <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="documents.html">Documents</a></li>
+      <li><a href="arab-ai.html" class="active">Arab AI</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="dr-badge">
+        <div class="dr-badge-avatar">DR</div>
+        <span>By Dr. Relentless</span>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="window.location.href='login.html'">Log In</button>
+      <button class="btn btn-primary btn-sm" onclick="window.location.href='signup.html'">Get Started</button>
+    </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../index.html">🏠 Home</a>
+  <a href="about.html">ℹ️ About Us</a>
+  <a href="courses.html">📚 Courses</a>
+  <a href="documents.html">📄 Documents</a>
+  <a href="arab-ai.html">🤖 Arab AI</a>
+  <a href="contact.html">📧 Contact</a>
+  <div class="mobile-actions">
+    <button class="btn btn-outline" onclick="window.location.href='login.html'">Log In</button>
+    <button class="btn btn-primary" onclick="window.location.href='signup.html'">Get Started</button>
+  </div>
+</div>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero ai-section">
+  <div class="container hero-inner">
+    <div class="ai-info">
+      <div class="ai-name-display">
+        <div class="ai-dot"></div>
+        <span>Arab</span>
+        <small>StudyCore AI Tutor</small>
+      </div>
+      <h1 class="hero-title" style="color:#fff;">Your Personal AI Study Tutor</h1>
+      <p style="color:#fff;max-width:500px;">Ask anything — from Grade 8 Mathematics to university-level Calculus. Arab is here 24/7 with patient, clear explanations.</p>
+      <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+        <button class="btn btn-amber" onclick="window.location.href='signup.html'">Start Chatting Free</button>
+        <a href="#chat-widget" class="btn btn-ghost">Chat Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ ARAB FEATURES ════════ -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">Why Choose Arab?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>Always Available</h3>
+        <p>24/7 support — even at midnight before your exam. Arab never sleeps.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>Patient & Encouraging</h3>
+        <p>Ask anything without fear of judgment. Arab explains until you understand.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>Step-by-Step Solutions</h3>
+        <p>Not just answers — full explanations and worked examples.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>Multiple Levels</h3>
+        <p>Secondary school, CBU NQ, university — Arab adapts to your level.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>Real African Context</h3>
+        <p>Examples and explanations using African scenarios you relate to.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>All Subjects</h3>
+        <p>Mathematics, Science, English, History, Computer Science, and more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CHAT WIDGET ════════ -->
+<section id="chat-widget" class="section">
+  <div class="container">
+    <div class="chat-widget" style="max-width:600px;margin:0 auto;">
+      <div class="chat-header">
+        <div class="chat-avatar">A</div>
+        <div class="chat-header-info">
+          <h4>Arab — AI Study Tutor</h4>
+          <span>Online now • Ready to help</span>
+        </div>
+        <div class="online-dot"></div>
+      </div>
+      
+      <div class="chat-quick-prompts">
+        <button class="quick-prompt" data-prompt="Explain the quadratic formula with an example">Quadratic formula</button>
+        <button class="quick-prompt" data-prompt="What is mitosis and how does it differ from meiosis?">Mitosis vs Meiosis</button>
+        <button class="quick-prompt" data-prompt="Give me study tips for exam preparation">Study tips</button>
+        <button class="quick-prompt" data-prompt="Explain Newton's laws of motion simply">Newton's Laws</button>
+      </div>
+      
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg ai">
+          <div class="msg-icon">A</div>
+          <div>
+            <div class="msg-bubble">Salaam! 👋 I'm <strong>Arab</strong>, your StudyCore AI tutor. I'm here to help you with any subject — whether you're in Grade 8, studying for ECZ, doing your CBU NQ, or at university level. What are we learning today?</div>
+            <div class="msg-time">Now</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" class="chat-input" placeholder="Ask Arab anything..." />
+        <button id="chatSend" class="chat-send">➤</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ TESTIMONIALS ════════ -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">What Students Say About Arab</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>"Arab helped me understand logarithms finally! The step-by-step explanations are so clear. I scored 89% in my maths exam!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,var(--teal),var(--navy))">T</div>
+          <div class="testi-author-info"><h5>Tafadzwa M.</h5><span>Grade 12, Lusaka</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>"As an NQ Engineering student, Arab's explanations of drawing principles have been game-changing. Highly recommend!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#F5A623,#e8912a)">B</div>
+          <div class="testi-author-info"><h5>Bwalya K.</h5><span>CBU NQ Engineering</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>"I use Arab every evening after school. It's like having a personal tutor available 24/7. Worth every penny!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">C</div>
+          <div class="testi-author-info"><h5>Chikondi L.</h5><span>University Student</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CTA ════════ -->
+<section class="cta-banner">
+  <div class="container">
+    <h2>Ready to Study Smarter with Arab?</h2>
+    <p>Join students who are winning with personalized AI tutoring.</p>
+    <button class="btn btn-amber" onclick="window.location.href='signup.html'">Get Started Free</button>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/logo.jpg" alt="StudyCore" />
+        <p>Empowering African students through quality education and innovative learning technology.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="documents.html">Documents</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul class="footer-links">
+          <li><a href="arab-ai.html">AI Tutor</a></li>
+          <li><a href="videos.html">Videos</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <ul class="footer-links">
+          <li><a href="#">Help Centre</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p>© 2026 StudyCore. All rights reserved.</p>
+        <div class="footer-dr">Website by Dr. Relentless ✦ Stay Curious & Winning</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
