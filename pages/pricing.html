@@ -1,198 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pricing Plans — StudyCore Subscriptions</title>
-  <meta name="description" content="Choose the right subscription plan for your learning needs." />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
-</head>
-<body>
-
-<!-- ════════ NAVBAR ════════ -->
-<nav class="navbar">
-  <div class="container nav-inner">
-    <a href="../index.html" class="nav-brand">
-      <img src="../assets/logo.jpg" alt="StudyCore Logo" />
-      <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="courses.html">Courses</a></li>
-      <li><a href="documents.html">Documents</a></li>
-      <li><a href="arab-ai.html">Arab AI</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <div class="nav-actions">
-      <div class="dr-badge">
-        <div class="dr-badge-avatar">DR</div>
-        <span>By Dr. Relentless</span>
-      </div>
-      <button class="btn btn-outline btn-sm" onclick="window.location.href='login.html'">Log In</button>
-      <button class="btn btn-primary btn-sm" onclick="window.location.href='signup.html'">Get Started</button>
-    </div>
-    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
-  </div>
-</nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="../index.html">🏠 Home</a>
-  <a href="about.html">ℹ️ About Us</a>
-  <a href="courses.html">📚 Courses</a>
-  <a href="documents.html">📄 Documents</a>
-  <a href="arab-ai.html">🤖 Arab AI</a>
-  <a href="contact.html">📧 Contact</a>
-  <div class="mobile-actions">
-    <button class="btn btn-outline" onclick="window.location.href='login.html'">Log In</button>
-    <button class="btn btn-primary" onclick="window.location.href='signup.html'">Get Started</button>
-  </div>
-</div>
-
-<!-- ════════ HERO ════════ -->
-<section class="hero">
-  <div class="container hero-inner">
-    <div class="hero-content">
-      <h1 class="hero-title">Simple, Transparent Pricing</h1>
-      <p class="hero-desc">Choose the plan that fits your learning journey. All plans include Arab AI tutor access.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ════════ PRICING PLANS ════════ -->
-<section class="section" style="background:#fff;">
-  <div class="container">
-    <div class="pricing-grid">
-      <!-- Free Plan -->
-      <div class="pricing-card">
-        <div class="pricing-header">
-          <h3>Free</h3>
-          <div class="pricing-price"><span class="currency">ZMW</span><span class="amount">0</span><span class="period">/month</span></div>
-          <p>Perfect for getting started</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing | StudyCore</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="top-bar">💳 StudyCore offers a free student experience for now, with practical plans coming soon.</div>
+      <nav class="navbar">
+        <div class="container nav-inner">
+          <a href="../index.html" class="nav-brand">
+            <img src="../assets/logo.jpg" alt="StudyCore Logo" />
+            <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
+          </a>
+          <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="documents.html">Documents</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a class="active" href="pricing.html">Pricing</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="announcements.html">Announcements</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <div class="nav-actions">
+            <a class="btn btn-outline btn-sm" href="login.html">Log In</a>
+            <a class="btn btn-primary btn-sm" href="signup.html">Sign Up</a>
+          </div>
         </div>
-        <ul class="pricing-features">
-          <li>✓ 50+ documents</li>
-          <li>✓ 10 video lessons</li>
-          <li>✓ Limited Arab AI chats (5/day)</li>
-          <li>✓ Basic study tools</li>
-          <li>✗ Premium courses</li>
-          <li>✗ Offline access</li>
-        </ul>
-        <button class="btn btn-outline" style="width:100%;justify-content:center;" onclick="window.location.href='signup.html'">Get Started</button>
-      </div>
+      </nav>
 
-      <!-- Pro Plan (Popular) -->
-      <div class="pricing-card" style="border:2px solid var(--teal);transform:scale(1.05);">
-        <div style="background:var(--teal);color:#fff;padding:8px 16px;border-radius:20px;display:inline-block;font-size:0.8rem;font-weight:700;margin-bottom:12px;">MOST POPULAR</div>
-        <div class="pricing-header">
-          <h3>Pro</h3>
-          <div class="pricing-price"><span class="currency">ZMW</span><span class="amount">49</span><span class="period">/month</span></div>
-          <p>For serious learners</p>
-        </div>
-        <ul class="pricing-features">
-          <li>✓ 500+ documents</li>
-          <li>✓ All video lessons</li>
-          <li>✓ Unlimited Arab AI</li>
-          <li>✓ All study tools</li>
-          <li>✓ Progress tracking</li>
-          <li>✓ Download for offline</li>
-        </ul>
-        <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="window.location.href='signup.html'">Subscribe Now</button>
-      </div>
+      <main class="page-main">
+        <section class="page-hero">
+          <div class="container">
+            <h1>Subscription and Pricing</h1>
+            <p>Students can enjoy a free and complete learning experience for now, with future premium plans in development.</p>
+            <div class="page-actions">
+              <a class="btn btn-primary" href="dashboard.html">Open Dashboard</a>
+              <button class="btn btn-outline" onclick="history.back()">← Back</button>
+            </div>
+          </div>
+        </section>
 
-      <!-- Premium Plan -->
-      <div class="pricing-card">
-        <div class="pricing-header">
-          <h3>Premium</h3>
-          <div class="pricing-price"><span class="currency">ZMW</span><span class="amount">99</span><span class="period">/month</span></div>
-          <p>For universities & groups</p>
-        </div>
-        <ul class="pricing-features">
-          <li>✓ Everything in Pro</li>
-          <li>✓ Priority Arab AI</li>
-          <li>✓ Custom study plans</li>
-          <li>✓ 1-on-1 tutor sessions</li>
-          <li>✓ Group access (5 people)</li>
-          <li>✓ Certification ready</li>
-        </ul>
-        <button class="btn btn-outline" style="width:100%;justify-content:center;" onclick="window.location.href='contact.html'">Contact Sales</button>
-      </div>
+        <section class="section">
+          <div class="container card-grid">
+            <div class="info-card">
+              <h3>🆓 Free Plan</h3>
+              <p>Access the full student dashboard, resources, and learning pages completely free.</p>
+            </div>
+            <div class="info-card">
+              <h3>🌟 Premium Plan</h3>
+              <p>Coming soon with deeper study packs, live tutoring support, and advanced revision tools.</p>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
-  </div>
-</section>
-
-<!-- ════════ FAQ ════════ -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">Frequently Asked Questions</h2>
-    <div class="faq-grid">
-      <div class="faq-card">
-        <h4>Can I upgrade or downgrade anytime?</h4>
-        <p>Yes, you can change your plan at any time. Changes take effect on your next billing date.</p>
-      </div>
-      <div class="faq-card">
-        <h4>Is there a free trial for Pro?</h4>
-        <p>Yes! Try Pro free for 7 days. No credit card required.</p>
-      </div>
-      <div class="faq-card">
-        <h4>Do you offer refunds?</h4>
-        <p>We offer a 30-day money-back guarantee if you're not satisfied.</p>
-      </div>
-      <div class="faq-card">
-        <h4>What payment methods do you accept?</h4>
-        <p>Mobile money, bank transfer, and major credit cards. We support local Zambian payment methods.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════ FOOTER ════════ -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <img src="../assets/logo.jpg" alt="StudyCore" />
-        <p>Empowering African students through quality education and innovative learning technology.</p>
-      </div>
-      <div class="footer-col">
-        <h5>Quick Links</h5>
-        <ul class="footer-links">
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="documents.html">Documents</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Resources</h5>
-        <ul class="footer-links">
-          <li><a href="arab-ai.html">AI Tutor</a></li>
-          <li><a href="videos.html">Videos</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-          <li><a href="dashboard.html">Dashboard</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Support</h5>
-        <ul class="footer-links">
-          <li><a href="#">Help Centre</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Use</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <p>© 2026 StudyCore. All rights reserved.</p>
-        <div class="footer-dr">Website by Dr. Relentless ✦ Stay Curious & Winning</div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script src="../js/main.js"></script>
-</body>
+    <script src="../js/main.js" defer></script>
+  </body>
 </html>

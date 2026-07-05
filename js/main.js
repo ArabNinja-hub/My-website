@@ -377,7 +377,7 @@ function showQuizResult() {
   document.getElementById('resultMsg').textContent = msg;
 }
 document.getElementById('restartQuiz')?.addEventListener('click', () => { quizIndex = 0; quizScore = 0; quizAnswered = false; loadQuiz(); });
-if (document.getElementById('quizProgressFill')) { loadQuiz(); }
+loadQuiz();
 
 // ── Forms ──
 document.getElementById('signupForm')?.addEventListener('submit', function(e) {
@@ -386,32 +386,10 @@ document.getElementById('signupForm')?.addEventListener('submit', function(e) {
   closeModal('signupModal');
   showToast(`Welcome to StudyCore, ${name}! Stay curious & winning! 🌟`);
 });
-document.getElementById('loginForm')?.addEventListener('submit', async function(e) {
+document.getElementById('loginForm')?.addEventListener('submit', function(e) {
   e.preventDefault();
-  const email = document.getElementById('email')?.value.trim();
-  const password = document.getElementById('password')?.value;
-  if (!email || !password) { showToast('Please enter both email and password', 'error'); return; }
-  const submitBtn = this.querySelector('button[type="submit"]');
-  if (submitBtn) submitBtn.disabled = true;
-  try {
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    });
-    const data = await res.json().catch(() => ({}));
-    if (res.ok && data.success) {
-      if (data.token) localStorage.setItem('auth_token', data.token);
-      showToast(data.message || 'Welcome back! Redirecting...', 'success');
-      setTimeout(() => { window.location.href = '/pages/dashboard.html'; }, 700);
-    } else {
-      showToast(data.message || 'Invalid credentials', 'error');
-    }
-  } catch (err) {
-    showToast('Connection issue. Please try again.', 'error');
-  } finally {
-    if (submitBtn) submitBtn.disabled = false;
-  }
+  closeModal('loginModal');
+  showToast('Welcome back! Let\'s get learning 📚');
 });
 
 // ── Animate on scroll ──

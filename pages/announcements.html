@@ -1,353 +1,73 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Announcements & Updates — StudyCore</title>
-  <meta name="description" content="Latest news and updates from StudyCore." />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Announcements & Updates | StudyCore</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="top-bar">📢 Stay informed with the latest updates, notices, and study reminders.</div>
+      <nav class="navbar">
+        <div class="container nav-inner">
+          <a href="../index.html" class="nav-brand">
+            <img src="../assets/logo.jpg" alt="StudyCore Logo" />
+            <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
+          </a>
+          <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="documents.html">Documents</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a class="active" href="announcements.html">Announcements</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <div class="nav-actions">
+            <a class="btn btn-outline btn-sm" href="login.html">Log In</a>
+            <a class="btn btn-primary btn-sm" href="signup.html">Sign Up</a>
+          </div>
+        </div>
+      </nav>
 
-<!-- ════════ NAVBAR ════════ -->
-<nav class="navbar">
-  <div class="container nav-inner">
-    <a href="../index.html" class="nav-brand">
-      <img src="../assets/logo.jpg" alt="StudyCore Logo" />
-      <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="courses.html">Courses</a></li>
-      <li><a href="documents.html">Documents</a></li>
-      <li><a href="arab-ai.html">Arab AI</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <div class="nav-actions">
-      <div class="dr-badge">
-        <div class="dr-badge-avatar">DR</div>
-        <span>By Dr. Relentless</span>
-      </div>
-      <button class="btn btn-outline btn-sm" onclick="window.location.href='login.html'">Log In</button>
-      <button class="btn btn-primary btn-sm" onclick="window.location.href='signup.html'">Get Started</button>
+      <main class="page-main">
+        <section class="page-hero">
+          <div class="container">
+            <h1>Announcements & Updates</h1>
+            <p>Read the latest news, study tips, and platform updates from StudyCore.</p>
+            <div class="page-actions">
+              <a class="btn btn-primary" href="dashboard.html">Open Dashboard</a>
+              <button class="btn btn-outline" onclick="history.back()">← Back</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container card-grid">
+            <div class="info-card">
+              <h3>🆕 New study packs released</h3>
+              <p>Fresh revision guides and practice material are now available for mathematics and science.</p>
+            </div>
+            <div class="info-card">
+              <h3>📅 Live learning update</h3>
+              <p>New lesson videos and subject pages have been added for faster navigation.</p>
+            </div>
+            <div class="info-card">
+              <h3>🎓 Student portal refresh</h3>
+              <p>The student dashboard now includes saved resources and recommended learning materials.</p>
+            </div>
+            <div class="info-card">
+              <h3>📱 Contact support</h3>
+              <p>Students can now reach StudyCore quickly through WhatsApp and social channels.</p>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
-    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
-  </div>
-</nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="../index.html">🏠 Home</a>
-  <a href="courses.html">📚 Courses</a>
-  <a href="documents.html">📄 Documents</a>
-  <a href="videos.html">🎬 Videos</a>
-  <a href="arab-ai.html">🤖 Arab AI</a>
-  <a href="about.html">ℹ️ About</a>
-  <a href="contact.html">📧 Contact</a>
-  <div class="mobile-actions">
-    <button class="btn btn-outline" onclick="window.location.href='login.html'">Log In</button>
-    <button class="btn btn-primary" onclick="window.location.href='signup.html'">Get Started</button>
-  </div>
-</div>
-
-<!-- ════════ HERO ════════ -->
-<section class="hero">
-  <div class="container hero-inner">
-    <div class="hero-content">
-      <h1 class="hero-title">Latest Announcements</h1>
-      <p class="hero-desc">Stay updated with the latest news, features, and resources from StudyCore.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ════════ ANNOUNCEMENTS ════════ -->
-<section class="section" style="background:#fff;">
-  <div class="container">
-    <div class="announcement-card" style="max-width:700px;margin:0 auto;margin-bottom:24px;background:#f0fffe;padding:24px;border-radius:12px;border-left:4px solid var(--teal);">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
-        <h3 style="margin:0;">🎉 CBU NQ Resources Launch Complete</h3>
-        <span style="background:var(--teal);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">NEW</span>
-      </div>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 12px;">Posted on July 3, 2026</p>
-      <p>We're thrilled to announce the complete launch of CBU NQ resources! Engineering, Business, ICT, and Applied Sciences students now have access to 200+ specialized documents, video lessons, and expert materials. Arab AI tutor is also trained on NQ curriculum. <a href="courses.html" style="color:var(--teal);text-decoration:none;font-weight:600;">Explore CBU NQ Courses →</a></p>
-    </div>
-
-    <div class="announcement-card" style="max-width:700px;margin:0 auto;margin-bottom:24px;background:#fffff0;padding:24px;border-radius:12px;border-left:4px solid var(--amber);">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
-        <h3 style="margin:0;">🎓 Arab AI Tutor Now Available 24/7</h3>
-        <span style="background:var(--amber);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">FEATURED</span>
-      </div>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 12px;">Posted on June 28, 2026</p>
-      <p>Arab, your AI study tutor, is now fully operational 24/7! With advanced AI training across all subjects from Grade 8 to university level, Arab provides instant explanations, step-by-step solutions, and personalized study guidance. Start chatting now! <a href="arab-ai.html" style="color:var(--teal);text-decoration:none;font-weight:600;">Chat with Arab →</a></p>
-    </div>
-
-    <div class="announcement-card" style="max-width:700px;margin:0 auto;margin-bottom:24px;background:#f0f4ff;padding:24px;border-radius:12px;border-left:4px solid var(--navy);">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
-        <h3 style="margin:0;">📱 Mobile App Coming Soon!</h3>
-        <span style="background:var(--navy);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">COMING SOON</span>
-      </div>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 12px;">Posted on June 15, 2026</p>
-      <p>Download StudyCore on the go! Our iOS and Android apps will be available in Q3 2026. Study offline, download resources, and chat with Arab from anywhere. Sign up on our newsletter to be notified when it launches!</p>
-    </div>
-
-    <div class="announcement-card" style="max-width:700px;margin:0 auto;margin-bottom:24px;background:#f0fff4;padding:24px;border-radius:12px;border-left:4px solid var(--green);">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
-        <h3 style="margin:0;">📚 500+ Documents Library Milestone</h3>
-        <span style="background:var(--green);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">MILESTONE</span>
-      </div>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 12px;">Posted on May 20, 2026</p>
-      <p>StudyCore has reached 500+ quality study documents! From Grade 8 through university level, secondary school through CBU NQ, our library now covers every subject and level. All documents are curriculum-aligned and exam-focused. <a href="documents.html" style="color:var(--teal);text-decoration:none;font-weight:600;">Browse Documents →</a></p>
-    </div>
-
-    <div class="announcement-card" style="max-width:700px;margin:0 auto;background:#f9f9f9;padding:24px;border-radius:12px;border-left:4px solid var(--text-muted);">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
-        <h3 style="margin:0;">🎬 Video Lessons Channel Expanded</h3>
-        <span style="background:var(--text-muted);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">UPDATE</span>
-      </div>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 12px;">Posted on May 5, 2026</p>
-      <p>We've added 50+ new video lessons from Dr. Relentless and expert educators. Topics include advanced mathematics, physics, chemistry, biology, and computer science. Watch, learn, and master at your own pace!</p>
-    </div>
-  </div>
-</section>
-
-<!-- ════════ NEWSLETTER SIGNUP ════════ -->
-<section class="section">
-  <div class="container" style="max-width:600px;text-align:center;">
-    <h2 class="section-title">Stay Updated</h2>
-    <p style="margin-bottom:24px;">Subscribe to receive announcements about new courses, resources, and features.</p>
-    <div style="display:flex;gap:12px;margin-bottom:16px;">
-      <input type="email" placeholder="your@email.com" style="flex:1;padding:12px 16px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font-body);" />
-      <button class="btn btn-primary" style="padding:12px 24px;">Subscribe</button>
-    </div>
-    <p style="font-size:0.85rem;color:var(--text-muted);">We'll never share your email. Unsubscribe anytime.</p>
-  </div>
-</section>
-
-<!-- ════════ FOOTER ════════ -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <img src="../assets/logo.jpg" alt="StudyCore" />
-        <p>Empowering African students through quality education and innovative learning technology.</p>
-      </div>
-      <div class="footer-col">
-        <h5>Quick Links</h5>
-        <ul class="footer-links">
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="documents.html">Documents</a></li>
-          <li><a href="videos.html">Videos</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Resources</h5>
-        <ul class="footer-links">
-          <li><a href="arab-ai.html">AI Tutor</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-          <li><a href="dashboard.html">Dashboard</a></li>
-          <li><a href="announcements.html">Announcements</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Support</h5>
-        <ul class="footer-links">
-          <li><a href="contact.html">Contact Us</a></li>
-          <li><a href="#">Help Centre</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Use</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <p>© 2026 StudyCore. All rights reserved.</p>
-        <div class="footer-dr">Website by Dr. Relentless ✦ Stay Curious & Winning</div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script src="../js/main.js"></script>
-</body>
+    <script src="../js/main.js" defer></script>
+  </body>
 </html>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Announcements & Updates — StudyCore</title>
-  <meta name="description" content="Latest news and updates from StudyCore." />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
-</head>
-<body>
-
-<!-- ════════ NAVBAR ════════ -->
-<nav class="navbar">
-  <div class="container nav-inner">
-    <a href="../index.html" class="nav-brand">
-      <img src="../assets/logo.jpg" alt="StudyCore Logo" />
-      <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="courses.html">Courses</a></li>
-      <li><a href="documents.html">Documents</a></li>
-      <li><a href="arab-ai.html">Arab AI</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <div class="nav-actions">
-      <div class="dr-badge">
-        <div class="dr-badge-avatar">DR</div>
-        <span>By Dr. Relentless</span>
-      </div>
-      <button class="btn btn-outline btn-sm" onclick="window.location.href='login.html'">Log In</button>
-      <button class="btn btn-primary btn-sm" onclick="window.location.href='signup.html'">Get Started</button>
-    </div>
-    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
-  </div>
-</nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="../index.html">🏠 Home</a>
-  <a href="courses.html">📚 Courses</a>
-  <a href="documents.html">📄 Documents</a>
-  <a href="videos.html">🎬 Videos</a>
-  <a href="arab-ai.html">🤖 Arab AI</a>
-  <a href="about.html">ℹ️ About</a>
-  <a href="contact.html">📧 Contact</a>
-  <div class="mobile-actions">
-    <button class="btn btn-outline" onclick="window.location.href='login.html'">Log In</button>
-    <button class="btn btn-primary" onclick="window.location.href='signup.html'">Get Started</button>
-  </div>
-</div>
-
-<!-- ════════ HERO ════════ -->
-<section class="hero">
-  <div class="container hero-inner">
-    <div class="hero-content">
-      <h1 class="hero-title">Latest Announcements</h1>
-      <p class="hero-desc">Stay updated with the latest news, features, and resources from StudyCore.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ════════ ANNOUNCEMENTS ════════ -->
-<section class="section" style="background:#fff;">
-  <div class="container">
-    <div class="announcement-card" style="max-width:700px;margin:0 auto;margin-bottom:24px;background:#f0fffe;padding:24px;border-radius:12px;border-left:4px solid var(--teal);">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
-        <h3 style="margin:0;">🎉 CBU NQ Resources Launch Complete</h3>
-        <span style="background:var(--teal);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">NEW</span>
-      </div>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 12px;">Posted on July 3, 2026</p>
-      <p>We're thrilled to announce the complete launch of CBU NQ resources! Engineering, Business, ICT, and Applied Sciences students now have access to 200+ specialized documents, video lessons, and expert materials. Arab AI tutor is also trained on NQ curriculum. <a href="courses.html" style="color:var(--teal);text-decoration:none;font-weight:600;">Explore CBU NQ Courses →</a></p>
-    </div>
-
-    <div class="announcement-card" style="max-width:700px;margin:0 auto;margin-bottom:24px;background:#fffff0;padding:24px;border-radius:12px;border-left:4px solid var(--amber);">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
-        <h3 style="margin:0;">🎓 Arab AI Tutor Now Available 24/7</h3>
-        <span style="background:var(--amber);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">FEATURED</span>
-      </div>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 12px;">Posted on June 28, 2026</p>
-      <p>Arab, your AI study tutor, is now fully operational 24/7! With advanced AI training across all subjects from Grade 8 to university level, Arab provides instant explanations, step-by-step solutions, and personalized study guidance. Start chatting now! <a href="arab-ai.html" style="color:var(--teal);text-decoration:none;font-weight:600;">Chat with Arab →</a></p>
-    </div>
-
-    <div class="announcement-card" style="max-width:700px;margin:0 auto;margin-bottom:24px;background:#f0f4ff;padding:24px;border-radius:12px;border-left:4px solid var(--navy);">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
-        <h3 style="margin:0;">📱 Mobile App Coming Soon!</h3>
-        <span style="background:var(--navy);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">COMING SOON</span>
-      </div>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 12px;">Posted on June 15, 2026</p>
-      <p>Download StudyCore on the go! Our iOS and Android apps will be available in Q3 2026. Study offline, download resources, and chat with Arab from anywhere. Sign up on our newsletter to be notified when it launches!</p>
-    </div>
-
-    <div class="announcement-card" style="max-width:700px;margin:0 auto;margin-bottom:24px;background:#f0fff4;padding:24px;border-radius:12px;border-left:4px solid var(--green);">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
-        <h3 style="margin:0;">📚 500+ Documents Library Milestone</h3>
-        <span style="background:var(--green);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">MILESTONE</span>
-      </div>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 12px;">Posted on May 20, 2026</p>
-      <p>StudyCore has reached 500+ quality study documents! From Grade 8 through university level, secondary school through CBU NQ, our library now covers every subject and level. All documents are curriculum-aligned and exam-focused. <a href="documents.html" style="color:var(--teal);text-decoration:none;font-weight:600;">Browse Documents →</a></p>
-    </div>
-
-    <div class="announcement-card" style="max-width:700px;margin:0 auto;background:#f9f9f9;padding:24px;border-radius:12px;border-left:4px solid var(--text-muted);">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;">
-        <h3 style="margin:0;">🎬 Video Lessons Channel Expanded</h3>
-        <span style="background:var(--text-muted);color:#fff;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">UPDATE</span>
-      </div>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 12px;">Posted on May 5, 2026</p>
-      <p>We've added 50+ new video lessons from Dr. Relentless and expert educators. Topics include advanced mathematics, physics, chemistry, biology, and computer science. Watch, learn, and master at your own pace!</p>
-    </div>
-  </div>
-</section>
-
-<!-- ════════ NEWSLETTER SIGNUP ════════ -->
-<section class="section">
-  <div class="container" style="max-width:600px;text-align:center;">
-    <h2 class="section-title">Stay Updated</h2>
-    <p style="margin-bottom:24px;">Subscribe to receive announcements about new courses, resources, and features.</p>
-    <div style="display:flex;gap:12px;margin-bottom:16px;">
-      <input type="email" placeholder="your@email.com" style="flex:1;padding:12px 16px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font-body);" />
-      <button class="btn btn-primary" style="padding:12px 24px;">Subscribe</button>
-    </div>
-    <p style="font-size:0.85rem;color:var(--text-muted);">We'll never share your email. Unsubscribe anytime.</p>
-  </div>
-</section>
-
-<!-- ════════ FOOTER ════════ -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <img src="../assets/logo.jpg" alt="StudyCore" />
-        <p>Empowering African students through quality education and innovative learning technology.</p>
-      </div>
-      <div class="footer-col">
-        <h5>Quick Links</h5>
-        <ul class="footer-links">
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="documents.html">Documents</a></li>
-          <li><a href="videos.html">Videos</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Resources</h5>
-        <ul class="footer-links">
-          <li><a href="arab-ai.html">AI Tutor</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-          <li><a href="dashboard.html">Dashboard</a></li>
-          <li><a href="announcements.html">Announcements</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Support</h5>
-        <ul class="footer-links">
-          <li><a href="contact.html">Contact Us</a></li>
-          <li><a href="#">Help Centre</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Use</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <p>© 2026 StudyCore. All rights reserved.</p>
-        <div class="footer-dr">Website by Dr. Relentless ✦ Stay Curious & Winning</div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script src="../js/main.js"></script>
-</body>
-</html>
->>>>>>> 1cde29be8ca7e601ebd60d85a4a6e833cfabb80f
