@@ -4,6 +4,989 @@
 // AI Tutor: Arab
 // =============================================
 
+const STORAGE_KEYS = {
+  users: 'studycore_users',
+  currentUser: 'studycore_current_user',
+  theme: 'studycore_theme',
+  rememberedLogin: 'studycore_remembered_login'
+};
+
+const DEFAULT_ANNOUNCEMENTS = [
+  { id: 'a1', title: 'New study packs released', detail: 'Fresh revision guides and practice material are now available for mathematics and science.', createdAt: '2026-07-02T09:00:00.000Z' },
+  { id: 'a2', title: 'Live learning update', detail: 'New lesson videos and subject pages have been added for faster navigation.', createdAt: '2026-07-01T09:00:00.000Z' },
+  { id: 'a3', title: 'Student portal refresh', detail: 'The student dashboard now includes reminders, saved resources, and progress tracking.', createdAt: '2026-06-28T09:00:00.000Z' }
+];
+
+const DEFAULT_ASSIGNMENTS = [
+  { id: 'm1', title: 'Algebra practice set', subject: 'Mathematics', due: 'Tomorrow', description: 'Solve a set of quadratic equations and graph the solutions.' },
+  { id: 'p1', title: 'Physics investigation worksheet', subject: 'Physics', due: 'Friday', description: 'Complete the motion and energy worksheet with worked answers.' },
+  { id: 'c1', title: 'Chemistry reaction review', subject: 'Chemistry', due: 'Next week', description: 'Explain the reaction types and balance sample equations.' }
+];
+
+const DEFAULT_QUIZZES = [
+  { id: 'q1', title: 'Mathematics revision', subject: 'Mathematics', questions: [
+    { prompt: 'What is the value of 7²?', options: ['49','14','21','56'], answer: 0 },
+    { prompt: 'Solve 2x + 3 = 11', options: ['x = 4','x = 5','x = 6','x = 7'], answer: 1 }
+  ] },
+  { id: 'q2', title: 'Physics quick test', subject: 'Physics', questions: [
+    { prompt: 'What does speed measure?', options: ['Distance only','Distance over time','Force over mass','Energy stored'], answer: 1 }
+  ] }
+];
+
+function getStoredList(key, fallback) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) || 'null');
+    return Array.isArray(value) ? value : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function saveStoredList(key, items) {
+  localStorage.setItem(key, JSON.stringify(items));
+}
+
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.users) || '[]'); }
+  catch { return []; }
+}
+
+function parseLearningLevel(level) {
+  return level === 'tertiary' ? 'tertiary' : 'secondary';
+}
+
+function normalizeUser(user) {
+  if (!user) return null;
+  return {
+    ...user,
+    subscription: user.subscription || 'trial',
+    learningLevel: parseLearningLevel(user.learningLevel),
+    darkMode: Boolean(user.darkMode),
+    // Role is always recomputed from email via StudyCoreAuth (js/auth.js),
+    // never trusted from stored/incoming data. This self-heals any existing
+    // account the moment it's saved, and makes it impossible to grant
+    // admin access through anything other than logging in as the one
+    // admin email. See js/auth.js for the single source of truth.
+    role: StudyCoreAuth.computeRole(user.email)
+  };
+}
+
+function getLearningLabel(level) {
+  return parseLearningLevel(level) === 'tertiary' ? 'Tertiary' : 'Secondary';
+}
+
+function saveUsers(users) {
+  localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(users));
+}
+
+function getCurrentUser() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.currentUser) || 'null'); }
+  catch { return null; }
+}
+
+function setCurrentUser(user) {
+  localStorage.setItem(STORAGE_KEYS.currentUser, JSON.stringify(user));
+}
+
+function clearCurrentUser() {
+  localStorage.removeItem(STORAGE_KEYS.currentUser);
+}
+
+function getRememberedLogin() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.rememberedLogin) || 'null'); }
+  catch { return null; }
+}
+
+function setRememberedLogin(email) {
+  if (!email) return;
+  localStorage.setItem(STORAGE_KEYS.rememberedLogin, JSON.stringify({ email: email.toLowerCase() }));
+}
+
+function clearRememberedLogin() {
+  localStorage.removeItem(STORAGE_KEYS.rememberedLogin);
+}
+
+function persistUser(user) {
+  const normalizedUser = normalizeUser(user);
+  if (!normalizedUser) return null;
+  const users = getUsers();
+  const index = users.findIndex(item => item.id === normalizedUser.id || item.email?.toLowerCase() === normalizedUser.email?.toLowerCase());
+  if (index >= 0) {
+    users[index] = { ...users[index], ...normalizedUser };
+  } else {
+    users.push(normalizedUser);
+  }
+  saveUsers(users);
+  setCurrentUser(normalizedUser);
+  return normalizedUser;
+}
+
+function restoreSession() {
+  const currentUser = getCurrentUser();
+  if (currentUser) return persistUser(currentUser);
+  const remembered = getRememberedLogin();
+  if (!remembered?.email) return null;
+  const users = getUsers();
+  const user = users.find(item => item.email?.toLowerCase() === remembered.email.toLowerCase());
+  if (!user) return null;
+  return persistUser(user);
+}
+
+function isInPagesFolder() {
+  return window.location.pathname.includes('/pages/');
+}
+
+function getPageLink(fileName) {
+  if (isInPagesFolder()) {
+    return fileName === 'index.html' ? '../index.html' : fileName;
+  }
+  return `pages/${fileName}`;
+}
+
+function isProtectedRoute(path = window.location.pathname) {
+  const normalized = path.replace(/\\/g, '/');
+  const publicPaths = [
+    '/', '/index.html',
+    '/pages/about.html',
+    '/pages/contact.html',
+    '/pages/pricing.html',
+    '/pages/login.html',
+    '/pages/signup.html'
+  ];
+  return !publicPaths.includes(normalized);
+}
+
+// Admin-only pages. Kept as a small explicit list (rather than a naming
+// convention) so it's obvious at a glance what StudyCoreAuth.isAdmin()
+// gates access to.
+function isAdminRoute(path = window.location.pathname) {
+  const normalized = path.replace(/\\/g, '/');
+  return normalized.endsWith('/pages/admin.html');
+}
+
+function getTrialState(user) {
+  if (!user) return { isActive: false, isPremium: false, daysLeft: 0, trialEnded: true };
+  const now = Date.now();
+  const trialEnds = new Date(user.trialEnd || Date.now()).getTime();
+  const isPremium = user.subscription === 'premium';
+  const trialEnded = !isPremium && now >= trialEnds;
+  const daysLeft = Math.max(0, Math.ceil((trialEnds - now) / 86400000));
+  return { isActive: isPremium || !trialEnded, isPremium, daysLeft, trialEnded };
+}
+
+function registerUser({ name, email, password, learningLevel = 'secondary' }) {
+  const users = getUsers();
+  const existing = users.find(user => user.email.toLowerCase() === email.toLowerCase());
+  if (existing) return { ok: false, message: 'An account with this email already exists.' };
+  const newUser = {
+    id: Date.now().toString(36),
+    name: name.trim(),
+    email: email.trim().toLowerCase(),
+    password,
+    subscription: 'trial',
+    trialEnd: Date.now() + 30 * 24 * 60 * 60 * 1000,
+    school: 'Not set',
+    grade: 'Grade 10+',
+    learningLevel: parseLearningLevel(learningLevel),
+    subjects: ['Mathematics', 'Science'],
+    joinedAt: new Date().toISOString(),
+    darkMode: false
+  };
+  const savedUser = persistUser(newUser);
+  setRememberedLogin(savedUser.email);
+  return { ok: true, user: savedUser };
+}
+
+function loginUser(email, password, remember = true) {
+  const users = getUsers();
+  const user = users.find(entry => entry.email.toLowerCase() === email.toLowerCase() && entry.password === password);
+  if (!user) return { ok: false, message: 'Invalid email or password.' };
+  const normalizedUser = persistUser(user);
+  if (remember) setRememberedLogin(normalizedUser.email);
+  else clearRememberedLogin();
+  return { ok: true, user: normalizedUser };
+}
+
+function updateUserProfile(updates) {
+  const currentUser = getCurrentUser();
+  if (!currentUser) return null;
+  const nextUser = {
+    ...currentUser,
+    ...updates,
+    learningLevel: parseLearningLevel(updates.learningLevel || currentUser.learningLevel || 'secondary')
+  };
+  return persistUser(nextUser);
+}
+
+function logoutUser() {
+  clearCurrentUser();
+  clearRememberedLogin();
+  window.location.href = getPageLink('index.html');
+}
+
+function applyTheme(theme = localStorage.getItem(STORAGE_KEYS.theme) || 'light') {
+  document.body.dataset.theme = theme;
+  localStorage.setItem(STORAGE_KEYS.theme, theme);
+  const toggle = document.getElementById('themeToggle');
+  if (toggle) toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+
+function updateAuthUI() {
+  const user = getCurrentUser();
+  const navActions = document.querySelector('.nav-actions');
+  if (!navActions) return;
+
+  const themeControl = document.createElement('button');
+  themeControl.id = 'themeToggle';
+  themeControl.className = 'btn btn-outline btn-sm';
+  themeControl.type = 'button';
+  themeControl.setAttribute('aria-label', 'Toggle theme');
+  themeControl.addEventListener('click', () => {
+    const nextTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+    applyTheme(nextTheme);
+    const currentUser = getCurrentUser();
+    if (currentUser) {
+      currentUser.darkMode = nextTheme === 'dark';
+      setCurrentUser(currentUser);
+    }
+  });
+
+  if (user) {
+    navActions.innerHTML = '';
+    navActions.appendChild(themeControl);
+    const dashboardLink = StudyCoreAuth.isAdmin(user)
+      ? `<a class="btn btn-outline btn-sm" href="${getPageLink('admin.html')}">Admin Dashboard</a>`
+      : `<a class="btn btn-outline btn-sm" href="${getPageLink('dashboard.html')}">Dashboard</a>`;
+    navActions.insertAdjacentHTML('beforeend', `
+      ${dashboardLink}
+      <button id="logoutBtn" class="btn btn-primary btn-sm" type="button">Log Out</button>
+    `);
+  } else {
+    navActions.innerHTML = '';
+    navActions.appendChild(themeControl);
+    navActions.insertAdjacentHTML('beforeend', `
+      <a class="btn btn-outline btn-sm" href="${getPageLink('login.html')}">Log In</a>
+      <a class="btn btn-primary btn-sm" href="${getPageLink('signup.html')}">Get Started</a>
+    `);
+  }
+
+  document.getElementById('logoutBtn')?.addEventListener('click', logoutUser);
+  applyTheme(user?.darkMode ? 'dark' : (localStorage.getItem(STORAGE_KEYS.theme) || 'light'));
+}
+
+function ensureAccess() {
+  const user = restoreSession() || getCurrentUser();
+  const path = window.location.pathname.replace(/\\/g, '/');
+  if (!user && isProtectedRoute(path)) {
+    window.location.replace(getPageLink('login.html'));
+    return false;
+  }
+  // Students (anyone who isn't the admin email) can never reach the
+  // admin dashboard, no matter how they got the URL.
+  if (isAdminRoute(path) && !StudyCoreAuth.isAdmin(user)) {
+    window.location.replace(getPageLink(user ? 'dashboard.html' : 'login.html'));
+    return false;
+  }
+  if (user && (path.endsWith('/login.html') || path.endsWith('/signup.html'))) {
+    window.location.replace(getPageLink(StudyCoreAuth.getDashboardPage(user)));
+    return false;
+  }
+  return true;
+}
+
+function renderAccessNotice(targetId = 'accessNotice') {
+  const user = getCurrentUser();
+  const target = document.getElementById(targetId);
+  if (!target || !user) return;
+  const { isActive, isPremium, daysLeft, trialEnded } = getTrialState(user);
+  if (isPremium) {
+    target.innerHTML = `<div class="access-banner premium">⭐ Premium active — all resources are unlocked.</div>`;
+  } else if (trialEnded) {
+    target.innerHTML = `<div class="access-banner locked">Your free trial has ended. Continue learning by subscribing to StudyCore Premium for K50 per month.</div>`;
+  } else {
+    target.innerHTML = `<div class="access-banner info">Your free trial is active. ${daysLeft} day${daysLeft === 1 ? '' : 's'} left to explore everything StudyCore has to offer.</div>`;
+  }
+}
+
+function bindProfileForm() {
+  const form = document.getElementById('profileForm');
+  if (!form || form.dataset.bound === 'true') return;
+  form.dataset.bound = 'true';
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const updates = {
+      name: document.getElementById('profileName')?.value || '',
+      email: document.getElementById('profileEmail')?.value || '',
+      school: document.getElementById('profileSchool')?.value || '',
+      grade: document.getElementById('profileGrade')?.value || '',
+      learningLevel: document.getElementById('profileLevel')?.value || 'secondary',
+      subjects: (document.getElementById('profileSubjects')?.value || '').split(',').map(item => item.trim()).filter(Boolean)
+    };
+    const updatedUser = updateUserProfile(updates);
+    if (!updatedUser) return;
+    showToast('Profile updated. Your learning path is ready.', 'success');
+    const targetRoute = `${getPageLink('courses.html')}?level=${updatedUser.learningLevel}`;
+    window.location.href = targetRoute;
+  });
+}
+
+function renderDashboard() {
+  const user = getCurrentUser();
+  const container = document.getElementById('dashboardContent');
+  if (!container || !user) return;
+  const { isActive, isPremium, daysLeft, trialEnded } = getTrialState(user);
+  const progress = isPremium ? 88 : trialEnded ? 42 : 68;
+  const recentLessons = [
+    { title: 'Quadratic equations', subject: 'Mathematics', progress: 'Completed' },
+    { title: 'Cell structure', subject: 'Biology', progress: 'In progress' },
+    { title: 'Newton’s laws', subject: 'Physics', progress: 'Saved' }
+  ];
+  const assignments = [
+    { title: 'Chemistry revision quiz', due: 'Tomorrow' },
+    { title: 'Programming exercise', due: 'Friday' }
+  ];
+  const announcements = getStoredList('studycore_announcements', DEFAULT_ANNOUNCEMENTS).slice(0, 2);
+  const adminBanner = StudyCoreAuth.isAdmin(user) ? `
+    <div class="info-card dashboard-hero" style="margin-bottom:16px;">
+      <div class="dashboard-hero-copy">
+        <h3>🛠️ You're signed in as the StudyCore admin</h3>
+        <p>Manage videos, documents, quizzes, assignments, announcements, and users from the Admin Dashboard.</p>
+      </div>
+      <a class="btn btn-primary btn-sm" href="${getPageLink('admin.html')}">Open Admin Dashboard</a>
+    </div>
+  ` : '';
+
+  container.innerHTML = `
+    ${adminBanner}
+    <div class="dashboard-grid">
+      <div class="info-card dashboard-hero">
+        <div class="dashboard-hero-copy">
+          <h3>Welcome back, ${user.name.split(' ')[0]} 👋</h3>
+          <p>${isPremium ? 'Premium access is active. Keep learning with full access to every resource.' : trialEnded ? 'Your trial has ended, but your learning journey can continue with StudyCore Premium.' : 'Your 30-day free trial is running. Explore videos, notes, and assignments while they are fully unlocked.'}</p>
+        </div>
+        <div class="dashboard-badges">
+          <span class="dashboard-pill">${isPremium ? 'Premium' : trialEnded ? 'Trial ended' : 'Free trial'}</span>
+          <span class="dashboard-pill">${trialEnded ? 'Locked content' : `${daysLeft} days left`}</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <h3>👤 Student profile</h3>
+        <ul class="detail-list">
+          <li><strong>Name:</strong> ${user.name}</li>
+          <li><strong>Email:</strong> ${user.email}</li>
+          <li><strong>School:</strong> ${user.school}</li>
+          <li><strong>Grade:</strong> ${user.grade}</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>⚙️ Edit profile & learning level</h3>
+        <form id="profileForm" class="profile-form">
+          <div class="form-group">
+            <label for="profileName">Full name</label>
+            <input id="profileName" type="text" value="${user.name}" />
+          </div>
+          <div class="form-group">
+            <label for="profileEmail">Email</label>
+            <input id="profileEmail" type="email" value="${user.email}" />
+          </div>
+          <div class="form-group">
+            <label for="profileSchool">School</label>
+            <input id="profileSchool" type="text" value="${user.school}" />
+          </div>
+          <div class="form-group">
+            <label for="profileGrade">Grade / year</label>
+            <input id="profileGrade" type="text" value="${user.grade}" />
+          </div>
+          <div class="form-group">
+            <label for="profileLevel">Learning level</label>
+            <select id="profileLevel">
+              <option value="secondary" ${user.learningLevel === 'secondary' ? 'selected' : ''}>Secondary</option>
+              <option value="tertiary" ${user.learningLevel === 'tertiary' ? 'selected' : ''}>Tertiary</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="profileSubjects">Subjects</label>
+            <input id="profileSubjects" type="text" value="${(user.subjects || []).join(', ')}" placeholder="Mathematics, Biology" />
+          </div>
+          <button class="btn btn-primary" type="submit">Save profile</button>
+        </form>
+      </div>
+      <div class="info-card">
+        <h3>📈 Learning progress</h3>
+        <div class="progress-block">
+          <div class="progress-labels"><span>Overall completion</span><span>${progress}%</span></div>
+          <div class="progress-bar"><span style="width:${progress}%"></span></div>
+        </div>
+        <div class="progress-block">
+          <div class="progress-labels"><span>Videos watched</span><span>12/20</span></div>
+          <div class="progress-bar"><span style="width:60%"></span></div>
+        </div>
+      </div>
+      <div class="info-card">
+        <h3>▶ Continue learning</h3>
+        <ul class="detail-list">
+          ${recentLessons.map(item => `<li><strong>${item.title}</strong> — ${item.subject} · ${item.progress}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>📝 Upcoming assignments</h3>
+        <ul class="detail-list">
+          ${assignments.map(item => `<li><strong>${item.title}</strong> — due ${item.due}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>📢 Latest announcements</h3>
+        <ul class="detail-list">
+          ${announcements.map(item => `<li><strong>${item.title}</strong><br>${item.detail || item.description}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+  `;
+  bindProfileForm();
+}
+
+function renderCoursePathNotice() {
+  const target = document.getElementById('courseLevelNotice');
+  if (!target) return;
+  const params = new URLSearchParams(window.location.search);
+  const user = getCurrentUser();
+  const level = params.get('level') || user?.learningLevel || 'secondary';
+  const label = getLearningLabel(level);
+  const detail = level === 'tertiary'
+    ? 'You are seeing the tertiary pathway with university-style study resources and advanced practice.'
+    : 'You are seeing the secondary pathway with school-focused lessons, revision notes, and exam support.';
+  target.innerHTML = `
+    <div class="access-banner ${level === 'tertiary' ? 'premium' : 'info'}">
+      <strong>${label} learning path</strong>
+      <p>${detail}</p>
+      <a class="btn btn-outline btn-sm" href="${getPageLink('dashboard.html')}">Edit profile</a>
+    </div>
+  `;
+}
+
+function injectGlobalSearch() {
+  const target = document.querySelector('.page-hero .container, .hero-inner .hero-content');
+  if (!target || document.getElementById('globalSearchForm')) return;
+  const form = document.createElement('form');
+  form.id = 'globalSearchForm';
+  form.className = 'global-search-form';
+  form.innerHTML = `
+    <input id="globalSearchInput" type="search" placeholder="Search videos, notes, quizzes, assignments" />
+    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+  `;
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const value = document.getElementById('globalSearchInput')?.value?.trim() || '';
+    if (!value) return;
+    window.location.href = `${getPageLink('search.html')}?q=${encodeURIComponent(value)}`;
+  });
+  target.appendChild(form);
+}
+
+function renderAnnouncements() {
+  const container = document.getElementById('announcementList');
+  if (!container) return;
+  const announcements = getStoredList('studycore_announcements', DEFAULT_ANNOUNCEMENTS).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  container.innerHTML = announcements.map((item) => `
+    <div class="info-card">
+      <h3>${item.title}</h3>
+      <p>${item.detail || item.description}</p>
+      <span class="resource-meta">Posted ${new Date(item.createdAt).toLocaleDateString()}</span>
+    </div>
+  `).join('');
+}
+
+function handleAnnouncementForm() {
+  const form = document.getElementById('announcementForm');
+  if (!form || form.dataset.bound === 'true') return;
+  form.dataset.bound = 'true';
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const title = document.getElementById('announcementTitle')?.value?.trim() || '';
+    const detail = document.getElementById('announcementDetail')?.value?.trim() || '';
+    if (!title || !detail) { showToast('Please add both a title and a message.', 'error'); return; }
+    const announcements = getStoredList('studycore_announcements', DEFAULT_ANNOUNCEMENTS);
+    announcements.unshift({ id: `a-${Date.now()}`, title, detail, createdAt: new Date().toISOString() });
+    saveStoredList('studycore_announcements', announcements.slice(0, 10));
+    form.reset();
+    renderAnnouncements();
+    showToast('Announcement published.', 'success');
+  });
+}
+
+function renderAssignments() {
+  const container = document.getElementById('assignmentList');
+  if (!container) return;
+  const assignments = getStoredList('studycore_assignments', DEFAULT_ASSIGNMENTS);
+  container.innerHTML = assignments.map((item) => `
+    <div class="info-card">
+      <h3>${item.title}</h3>
+      <p>${item.description}</p>
+      <div class="resource-meta">Subject: ${item.subject} • Due: ${item.due}</div>
+      <a class="btn btn-outline btn-sm" href="${getPageLink('documents.html')}" style="margin-top:10px;">Open resources</a>
+    </div>
+  `).join('');
+}
+
+function renderQuizzes() {
+  const container = document.getElementById('quizList');
+  if (!container) return;
+  const quizzes = getStoredList('studycore_quizzes', DEFAULT_QUIZZES);
+  container.innerHTML = quizzes.map((quiz, index) => `
+    <div class="info-card">
+      <h3>${quiz.title}</h3>
+      <p>${quiz.subject}</p>
+      <button class="btn btn-primary btn-sm" type="button" data-quiz-index="${index}">Start quiz</button>
+    </div>
+  `).join('');
+  container.querySelectorAll('[data-quiz-index]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const quizIndex = Number(button.dataset.quizIndex);
+      const selected = quizzes[quizIndex];
+      runQuiz(selected);
+    });
+  });
+}
+
+function runQuiz(quiz) {
+  if (!quiz) return;
+  const container = document.getElementById('quizList');
+  if (!container) return;
+  let score = 0;
+  const answers = quiz.questions.map((question, index) => {
+    const prompt = `${index + 1}. ${question.prompt}`;
+    const options = question.options.map((option, optionIndex) => `<label><input type="radio" name="q${index}" value="${optionIndex}" /> ${option}</label>`).join('');
+    return `<div class="quiz-question-card"><p>${prompt}</p>${options}</div>`;
+  }).join('');
+  container.innerHTML = `
+    <div class="info-card">
+      <h3>${quiz.title}</h3>
+      <p>${quiz.subject}</p>
+      <div>${answers}</div>
+      <button class="btn btn-primary" type="button" id="submitQuiz">Submit quiz</button>
+    </div>
+  `;
+  document.getElementById('submitQuiz')?.addEventListener('click', () => {
+    const selectedAnswers = Array.from(container.querySelectorAll('input[type="radio"]:checked')).map((input) => Number(input.value));
+    quiz.questions.forEach((question, index) => {
+      if (selectedAnswers[index] === question.answer) score += 1;
+    });
+    const percentage = Math.round((score / quiz.questions.length) * 100);
+    container.innerHTML = `
+      <div class="info-card">
+        <h3>${quiz.title} complete</h3>
+        <p>You scored ${score}/${quiz.questions.length} (${percentage}%).</p>
+        <button class="btn btn-outline btn-sm" type="button" onclick="window.location.reload()">Try again</button>
+      </div>
+    `;
+  });
+}
+
+function buildSearchIndex() {
+  const localResources = [
+    ...getStoredList('studycore_document_resources', []).map((item) => ({ type: 'Document', title: item.title, description: item.description, link: item.link || 'documents.html' })),
+    ...getStoredList('studycore_video_resources', []).map((item) => ({ type: 'Video', title: item.title, description: item.description, link: item.link || 'videos.html' }))
+  ];
+  const assignments = getStoredList('studycore_assignments', DEFAULT_ASSIGNMENTS).map((item) => ({ type: 'Assignment', title: item.title, description: item.description, link: 'assignments.html' }));
+  const quizzes = getStoredList('studycore_quizzes', DEFAULT_QUIZZES).map((item) => ({ type: 'Quiz', title: item.title, description: item.subject, link: 'quizzes.html' }));
+  const announcements = getStoredList('studycore_announcements', DEFAULT_ANNOUNCEMENTS).map((item) => ({ type: 'Announcement', title: item.title, description: item.detail || item.description, link: 'announcements.html' }));
+  return [...localResources, ...assignments, ...quizzes, ...announcements];
+}
+
+function renderSearchResults() {
+  const container = document.getElementById('searchResults');
+  if (!container) return;
+  const params = new URLSearchParams(window.location.search);
+  const query = (params.get('q') || '').trim().toLowerCase();
+  const results = buildSearchIndex().filter((item) => !query || `${item.title} ${item.description}`.toLowerCase().includes(query));
+  container.innerHTML = results.length ? results.map((item) => `
+    <a class="info-card" href="${item.link}">
+      <div class="resource-pill">${item.type}</div>
+      <h3>${item.title}</h3>
+      <p>${item.description}</p>
+    </a>
+  `).join('') : '<div class="info-card"><h3>No results yet</h3><p>Try another search term.</p></div>';
+}
+
+function renderLockedContent(pageName) {
+  const target = document.getElementById('accessNotice');
+  if (!target) return;
+  const user = getCurrentUser();
+  const { isPremium, trialEnded } = getTrialState(user);
+  if (!user) return;
+  if (isPremium || !trialEnded) return;
+  target.innerHTML = `
+    <div class="access-banner locked">
+      <strong>${pageName} is locked until you subscribe.</strong>
+      <p>Unlock videos, documents, quizzes, and assignments with StudyCore Premium for K50 per month.</p>
+      <a class="btn btn-primary btn-sm" href="${getPageLink('pricing.html')}">View subscription</a>
+    </div>
+  `;
+}
+
+function handleAuthForms() {
+  const remembered = getRememberedLogin();
+  const loginEmail = document.getElementById('loginEmail');
+  if (loginEmail && remembered?.email) {
+    loginEmail.value = remembered.email;
+  }
+
+  const signupForm = document.getElementById('signupForm');
+  if (signupForm) {
+    signupForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const name = document.getElementById('signupName')?.value || '';
+      const email = document.getElementById('signupEmail')?.value || '';
+      const password = document.getElementById('signupPassword')?.value || '';
+      const learningLevel = document.getElementById('signupLevel')?.value || 'secondary';
+      const result = registerUser({ name, email, password, learningLevel });
+      if (!result.ok) {
+        showToast(result.message, 'error');
+        return;
+      }
+      showToast(`Welcome to StudyCore, ${result.user.name}!`, 'success');
+      window.location.href = getPageLink(StudyCoreAuth.getDashboardPage(result.user));
+    });
+  }
+
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail')?.value || '';
+      const password = document.getElementById('loginPassword')?.value || '';
+      const remember = document.getElementById('rememberMe')?.checked || true;
+      const result = loginUser(email, password, remember);
+      if (!result.ok) {
+        showToast(result.message, 'error');
+        return;
+      }
+      const destination = StudyCoreAuth.getDashboardPage(result.user);
+      showToast(destination === 'admin.html' ? 'Welcome back, admin.' : 'Welcome back! Your learning dashboard is ready.', 'success');
+      window.location.href = getPageLink(destination);
+    });
+  }
+}
+
+function handleSubscriptionButton() {
+  const button = document.getElementById('subscribeBtn');
+  if (!button) return;
+  const user = getCurrentUser();
+  if (user?.subscription === 'premium') {
+    button.textContent = 'Subscribed';
+    button.disabled = true;
+    return;
+  }
+  button.addEventListener('click', () => {
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+      window.location.href = getPageLink('login.html');
+      return;
+    }
+    const updatedUser = persistUser({ ...currentUser, subscription: 'premium', subscribedAt: new Date().toISOString(), trialEnd: Date.now() + 30 * 24 * 60 * 60 * 1000 });
+    setRememberedLogin(updatedUser.email);
+    showToast('Subscription activated — premium access is now unlocked.', 'success');
+    window.location.reload();
+  });
+}
+
+function enhanceHomePage() {
+  const user = getCurrentUser();
+  const cta = document.querySelector('.hero-actions .btn-primary');
+  if (cta) {
+    cta.textContent = user ? (StudyCoreAuth.isAdmin(user) ? 'Open Admin Dashboard' : 'Open Dashboard') : 'Explore Courses';
+    cta.href = user ? getPageLink(StudyCoreAuth.getDashboardPage(user)) : getPageLink('courses.html');
+  }
+  const secondary = document.querySelector('.hero-actions .btn-outline');
+  if (secondary) {
+    secondary.textContent = user ? 'View Pricing' : 'About StudyCore';
+    secondary.href = user ? getPageLink('pricing.html') : getPageLink('about.html');
+  }
+}
+
+function initAuthSystem() {
+  const user = getCurrentUser();
+  if (user?.darkMode) {
+    applyTheme('dark');
+  } else {
+    applyTheme(localStorage.getItem(STORAGE_KEYS.theme) || 'light');
+  }
+  updateAuthUI();
+  handleAuthForms();
+  handleSubscriptionButton();
+  enhanceHomePage();
+  renderAccessNotice('accessNotice');
+  renderDashboard();
+  renderCoursePathNotice();
+  injectGlobalSearch();
+  renderAnnouncements();
+  handleAnnouncementForm();
+  renderAssignments();
+  renderQuizzes();
+  renderSearchResults();
+  renderLockedContent('Videos');
+  if (window.location.pathname.includes('/videos.html')) {
+    renderLockedContent('Videos');
+  }
+  if (window.location.pathname.includes('/documents.html')) {
+    renderLockedContent('Documents');
+  }
+}
+
+function getStoredResources(type) {
+  try { return JSON.parse(localStorage.getItem(`studycore_${type}_resources`) || '[]'); }
+  catch { return []; }
+}
+
+function saveStoredResources(type, items) {
+  localStorage.setItem(`studycore_${type}_resources`, JSON.stringify(items));
+}
+
+function getSubjectPage(subject, type) {
+  const normalized = (subject || '').toLowerCase();
+  const map = {
+    mathematics: 'subjects/mathematics.html',
+    physics: 'subjects/physics.html',
+    chemistry: 'subjects/chemistry.html',
+    biology: 'subjects/biology.html',
+    programming: 'subjects/programming.html',
+    'computer science': 'subjects/programming.html',
+    'computer studies': 'subjects/programming.html',
+    communication: 'subjects/communication.html'
+  };
+  return map[normalized] || (type === 'video' ? 'videos.html' : 'documents.html');
+}
+
+function normalizeSubjectName(subject) {
+  return (subject || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '');
+}
+
+function matchesResourceSubject(itemSubject, targetSubject) {
+  const normalizedTarget = normalizeSubjectName(targetSubject);
+  if (!normalizedTarget || normalizedTarget === 'general') return true;
+  const normalizedItem = normalizeSubjectName(itemSubject);
+  if (!normalizedItem || normalizedItem === 'general') return false;
+  return normalizedItem === normalizedTarget || normalizedItem.includes(normalizedTarget) || normalizedTarget.includes(normalizedItem);
+}
+
+function isOwnerUser(user) {
+  if (!user) return false;
+  const role = (user.role || '').toLowerCase();
+  if (role === 'owner' || user.isOwner) return true;
+  const email = (user.email || '').toLowerCase();
+  return ['admin@studycore.com', 'drrelentless@gmail.com', 'drrelentless@studycore.com'].includes(email);
+}
+
+function shouldShowOwnerTools() {
+  return isOwnerUser(getCurrentUser());
+}
+
+function getCurrentSubjectName() {
+  const fromBody = document.body.dataset.subject || document.body.getAttribute('data-subject') || '';
+  if (fromBody) return fromBody;
+  const match = window.location.pathname.match(/subjects\/([^/]+)\.html$/i);
+  return match ? match[1] : '';
+}
+
+function renderSubjectResources() {
+  const subjectName = getCurrentSubjectName();
+  if (!subjectName) return;
+  const displayName = document.querySelector('.page-hero h1')?.textContent?.trim() || subjectName.charAt(0).toUpperCase() + subjectName.slice(1);
+  const ownerTools = document.getElementById('subjectOwnerTools');
+  if (ownerTools) ownerTools.style.display = shouldShowOwnerTools() ? '' : 'none';
+
+  const documentsContainer = document.getElementById('subjectDocuments');
+  const videosContainer = document.getElementById('subjectVideos');
+  const assignmentsContainer = document.getElementById('subjectAssignments');
+  const quizzesContainer = document.getElementById('subjectQuizzes');
+
+  const documentItems = getStoredResources('document').filter(item => matchesResourceSubject(item.subject, displayName));
+  const videoItems = getStoredResources('video').filter(item => matchesResourceSubject(item.subject, displayName));
+  const assignmentItems = getStoredList('studycore_assignments', DEFAULT_ASSIGNMENTS).filter(item => matchesResourceSubject(item.subject, displayName));
+  const quizItems = getStoredList('studycore_quizzes', DEFAULT_QUIZZES).filter(item => matchesResourceSubject(item.subject, displayName));
+
+  if (documentsContainer) {
+    documentsContainer.innerHTML = documentItems.length ? documentItems.map(item => `
+      <a class="info-card resource-card" href="${item.link || '#'}" target="_blank" rel="noopener noreferrer">
+        <h3>${item.title}</h3>
+        <p>${item.description || 'Open this document from StudyCore.'}</p>
+        <div class="resource-meta">${item.fileName ? `📎 ${item.fileName}` : '🔗 Open link'} • ${item.uploadedAt || 'Just added'}</div>
+      </a>
+    `).join('') : '<div class="info-card"><h3>No documents uploaded for this course yet</h3></div>';
+  }
+
+  if (videosContainer) {
+    videosContainer.innerHTML = videoItems.length ? videoItems.map(item => `
+      <a class="info-card resource-card" href="${item.link || '#'}" target="_blank" rel="noopener noreferrer">
+        <h3>${item.title}</h3>
+        <p>${item.description || 'Open this lesson video from StudyCore.'}</p>
+        <div class="resource-meta">${item.fileName ? `📎 ${item.fileName}` : '🔗 Open link'} • ${item.uploadedAt || 'Just added'}</div>
+      </a>
+    `).join('') : '<div class="info-card"><h3>No videos uploaded for this course yet</h3></div>';
+  }
+
+  if (assignmentsContainer) {
+    assignmentsContainer.innerHTML = assignmentItems.length ? assignmentItems.map(item => `
+      <div class="info-card">
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+        <div class="resource-meta">Due: ${item.due || 'Soon'}</div>
+      </div>
+    `).join('') : '<div class="info-card"><h3>No assignments uploaded for this course yet</h3></div>';
+  }
+
+  if (quizzesContainer) {
+    quizzesContainer.innerHTML = quizItems.length ? quizItems.map(item => `
+      <div class="info-card">
+        <h3>${item.title}</h3>
+        <p>${item.subject || displayName}</p>
+        <div class="resource-meta">${item.questions?.length || 0} question${(item.questions?.length || 0) === 1 ? '' : 's'}</div>
+      </div>
+    `).join('') : '<div class="info-card"><h3>No quizzes uploaded for this course yet</h3></div>';
+  }
+
+  bindSubjectPageForms(displayName);
+}
+
+function bindSubjectPageForms(subjectName) {
+  const assignmentForm = document.getElementById('subjectAssignmentForm');
+  if (assignmentForm && assignmentForm.dataset.bound !== 'true') {
+    assignmentForm.dataset.bound = 'true';
+    assignmentForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const title = document.getElementById('subjectAssignmentTitle')?.value?.trim() || '';
+      const due = document.getElementById('subjectAssignmentDue')?.value?.trim() || 'Soon';
+      const description = document.getElementById('subjectAssignmentDescription')?.value?.trim() || 'New assignment added for this course.';
+      if (!title) { showToast('Please add an assignment title.', 'error'); return; }
+      const assignments = getStoredList('studycore_assignments', DEFAULT_ASSIGNMENTS);
+      assignments.unshift({ id: `assignment-${Date.now()}`, title, subject: subjectName, due, description });
+      saveStoredList('studycore_assignments', assignments);
+      renderSubjectResources();
+      assignmentForm.reset();
+      showToast('Assignment added for this course.', 'success');
+    });
+  }
+
+  const quizForm = document.getElementById('subjectQuizForm');
+  if (quizForm && quizForm.dataset.bound !== 'true') {
+    quizForm.dataset.bound = 'true';
+    quizForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const title = document.getElementById('subjectQuizTitle')?.value?.trim() || '';
+      const prompt = document.getElementById('subjectQuizPrompt')?.value?.trim() || '';
+      const optionA = document.getElementById('subjectQuizOptionA')?.value?.trim() || '';
+      const optionB = document.getElementById('subjectQuizOptionB')?.value?.trim() || '';
+      const optionC = document.getElementById('subjectQuizOptionC')?.value?.trim() || '';
+      const optionD = document.getElementById('subjectQuizOptionD')?.value?.trim() || '';
+      const answer = Number(document.getElementById('subjectQuizAnswer')?.value || 0);
+      if (!title || !prompt || !optionA || !optionB || !optionC || !optionD) { showToast('Please complete the quiz form.', 'error'); return; }
+      const quizzes = getStoredList('studycore_quizzes', DEFAULT_QUIZZES);
+      quizzes.unshift({ id: `quiz-${Date.now()}`, title, subject: subjectName, questions: [{ prompt, options: [optionA, optionB, optionC, optionD], answer: Math.max(0, Math.min(3, answer)) }] });
+      saveStoredList('studycore_quizzes', quizzes);
+      renderSubjectResources();
+      quizForm.reset();
+      showToast('Quiz added for this course.', 'success');
+    });
+  }
+}
+
+function renderResourceCards(type, containerId, formId, options = {}) {
+  const container = document.getElementById(containerId);
+  const form = document.getElementById(formId);
+  if (!container) return;
+  const filterSubject = options.subject || getUrlSubject();
+  const items = getStoredResources(type).filter(item => {
+    if (!filterSubject) return true;
+    if (options.filter === 'past-papers') return matchesResourceSubject(item.subject, filterSubject) && isPastPaperItem(item);
+    return matchesResourceSubject(item.subject, filterSubject);
+  });
+  if (!items.length) {
+    container.innerHTML = `<div class="info-card"><h3>No ${options.label || type} uploaded yet</h3><p>Upload a new ${options.label || type} and it will appear here instantly.</p></div>`;
+    if (form) {
+      form.style.display = shouldShowOwnerTools() ? '' : 'none';
+    }
+    return;
+  }
+  container.innerHTML = items.map(item => `
+    <a class="info-card resource-card" href="${item.link || '#'}" target="_blank" rel="noopener noreferrer">
+      <div class="resource-card-top">
+        <span class="resource-pill">${item.subject || 'General'}</span>
+        <span class="resource-pill muted">${item.type || options.label || type}</span>
+      </div>
+      <h3>${item.title}</h3>
+      <p>${item.description || 'Open this resource directly from StudyCore.'}</p>
+      <div class="resource-meta">${item.fileName ? `📎 ${item.fileName}` : '🔗 Open link'} • ${item.uploadedAt || 'Just added'}</div>
+    </a>
+  `).join('');
+  if (form) {
+    form.style.display = shouldShowOwnerTools() ? '' : 'none';
+    if (!shouldShowOwnerTools() || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const title = document.getElementById(options.titleId)?.value?.trim() || '';
+      const description = document.getElementById(options.descriptionId)?.value?.trim() || '';
+      const subject = document.getElementById(options.subjectId)?.value || 'General';
+      const fileInput = document.getElementById(options.fileId);
+      const file = fileInput?.files?.[0];
+      if (!title) { showToast('Please add a title for this resource.', 'error'); return; }
+      const link = file ? URL.createObjectURL(file) : getSubjectPage(subject, type);
+      const resource = {
+        id: `${type}-${Date.now()}`,
+        title,
+        description,
+        subject,
+        type: type === 'video' ? 'Video' : 'Document',
+        link,
+        fileName: file?.name || '',
+        uploadedAt: new Date().toLocaleString()
+      };
+      const nextItems = [resource, ...getStoredResources(type)];
+      saveStoredResources(type, nextItems);
+      renderResourceCards(type, containerId, formId, options);
+      form.reset();
+      showToast(`${options.label || type} added and is ready to open.`, 'success');
+    });
+  }
+}
+
+function initResourcePages() {
+  renderSubjectResources();
+  if (window.location.pathname.includes('/documents.html')) {
+    renderResourceCards('document', 'documentCards', 'documentUploadForm', {
+      label: 'document',
+      titleId: 'documentTitle',
+      descriptionId: 'documentDescription',
+      subjectId: 'documentSubject',
+      fileId: 'documentFile',
+      subject: getUrlSubject(),
+      filter: new URLSearchParams(window.location.search).get('filter') || ''
+    });
+  }
+  if (window.location.pathname.includes('/videos.html')) {
+    renderResourceCards('video', 'videoCards', 'videoUploadForm', {
+      label: 'video',
+      titleId: 'videoTitle',
+      descriptionId: 'videoDescription',
+      subjectId: 'videoSubject',
+      fileId: 'videoFile',
+      subject: getUrlSubject()
+    });
+  }
+  if (window.location.pathname.includes('/assignments.html')) {
+    renderAssignmentsPage();
+  }
+  if (window.location.pathname.includes('/quizzes.html')) {
+    renderQuizzesPage();
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (!ensureAccess()) return;
+  initAuthSystem();
+  initResourcePages();
+});
+
 // ── Top bar hide on scroll ──
 const topBar = document.querySelector('.top-bar');
 const navbar = document.querySelector('.navbar');

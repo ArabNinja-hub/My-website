@@ -29,7 +29,7 @@
         <section class="page-hero">
           <div class="container">
             <h1>Mathematics</h1>
-            <p>Explore algebra, geometry, trigonometry, revision packs, quizzes, and practice assignments.</p>
+            <p id="subjectIntro">Explore algebra, geometry, trigonometry, revision packs, quizzes, and practice assignments.</p>
             <div class="page-actions">
               <a class="btn btn-primary" href="../documents.html">Open Documents</a>
               <button class="btn btn-outline" onclick="history.back()">← Back</button>
@@ -37,15 +37,102 @@
           </div>
         </section>
         <section class="section">
-          <div class="container card-grid">
-            <div class="info-card"><h3>📘 Notes</h3><p>Algebra, equations, and formula summaries.</p></div>
-            <div class="info-card"><h3>🎬 Videos</h3><p>Step-by-step video lessons on core mathematics topics.</p></div>
-            <div class="info-card"><h3>📝 Assignments</h3><p>Practice questions and guided exercises.</p></div>
-            <div class="info-card"><h3>🧠 Quizzes</h3><p>Short quizzes to test understanding and retention.</p></div>
+          <div class="container card-grid" id="subjectCards">
+            <a class="info-card" href="../documents.html?subject=mathematics"><h3>📘 Notes & Past Papers</h3><p id="noteContent">Algebra, equations, and formula summaries.</p></a>
+            <a class="info-card" href="../videos.html?subject=mathematics"><h3>🎬 Videos</h3><p id="videoContent">Step-by-step video lessons on core mathematics topics.</p></a>
+            <a class="info-card" href="../assignments.html?subject=mathematics"><h3>📝 Assignments</h3><p id="assignmentContent">Practice questions and guided exercises.</p></a>
+            <a class="info-card" href="../quizzes.html?subject=mathematics"><h3>🧠 Quizzes</h3><p id="quizContent">Short quizzes to test understanding and retention.</p></a>
+          </div>
+        </section>
+
+        <section class="section alt-section">
+          <div class="container">
+            <div class="section-heading">
+              <h2>Uploaded course materials</h2>
+              <p>Any documents, videos, assignments, and quizzes added for this course appear here for students.</p>
+            </div>
+            <div class="resource-grid" id="subjectDocuments"></div>
+            <div class="resource-grid" id="subjectVideos" style="margin-top: 16px;"></div>
+            <div class="resource-grid" id="subjectAssignments" style="margin-top: 16px;"></div>
+            <div class="resource-grid" id="subjectQuizzes" style="margin-top: 16px;"></div>
+            <div id="subjectOwnerTools" class="upload-box" style="margin-top: 24px;">
+              <h3>Owner-only upload panel</h3>
+              <form id="subjectAssignmentForm" class="upload-form">
+                <div class="form-group">
+                  <label for="subjectAssignmentTitle">Assignment title</label>
+                  <input id="subjectAssignmentTitle" type="text" placeholder="Practice exercise" required />
+                </div>
+                <div class="form-group">
+                  <label for="subjectAssignmentDue">Due date</label>
+                  <input id="subjectAssignmentDue" type="text" placeholder="Friday" />
+                </div>
+                <div class="form-group">
+                  <label for="subjectAssignmentDescription">Description</label>
+                  <textarea id="subjectAssignmentDescription" rows="3" placeholder="What students should complete"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Add assignment</button>
+              </form>
+              <form id="subjectQuizForm" class="upload-form" style="margin-top: 16px;">
+                <div class="form-group">
+                  <label for="subjectQuizTitle">Quiz title</label>
+                  <input id="subjectQuizTitle" type="text" placeholder="Quick quiz" required />
+                </div>
+                <div class="form-group">
+                  <label for="subjectQuizPrompt">Question</label>
+                  <input id="subjectQuizPrompt" type="text" placeholder="What is 2 + 2?" required />
+                </div>
+                <div class="form-group">
+                  <label for="subjectQuizOptionA">Option A</label>
+                  <input id="subjectQuizOptionA" type="text" required />
+                </div>
+                <div class="form-group">
+                  <label for="subjectQuizOptionB">Option B</label>
+                  <input id="subjectQuizOptionB" type="text" required />
+                </div>
+                <div class="form-group">
+                  <label for="subjectQuizOptionC">Option C</label>
+                  <input id="subjectQuizOptionC" type="text" required />
+                </div>
+                <div class="form-group">
+                  <label for="subjectQuizOptionD">Option D</label>
+                  <input id="subjectQuizOptionD" type="text" required />
+                </div>
+                <div class="form-group">
+                  <label for="subjectQuizAnswer">Correct option</label>
+                  <select id="subjectQuizAnswer">
+                    <option value="0">A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                  </select>
+                </div>
+                <button class="btn btn-primary" type="submit">Add quiz</button>
+              </form>
+            </div>
           </div>
         </section>
       </main>
     </div>
+    <script src="../../js/auth.js" defer></script>
     <script src="../../js/main.js" defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const user = localStorage.getItem('studycore_current_user') ? JSON.parse(localStorage.getItem('studycore_current_user')) : null;
+        const level = user?.learningLevel || 'secondary';
+        const intro = document.getElementById('subjectIntro');
+        const note = document.getElementById('noteContent');
+        const video = document.getElementById('videoContent');
+        const assignment = document.getElementById('assignmentContent');
+        const quiz = document.getElementById('quizContent');
+        document.body.setAttribute('data-subject', 'mathematics');
+        if (level === 'tertiary') {
+          intro.textContent = 'Move from algebra and calculus to applied modelling, linear algebra, and university-style problem solving.';
+          note.textContent = 'Advanced proofs, calculus foundations, and real-world mathematical modelling.';
+          video.textContent = 'Higher-level walkthroughs for analysis, statistics, and applied mathematics.';
+          assignment.textContent = 'University-style assignments with proof-based and analytical tasks.';
+          quiz.textContent = 'Challenge quizzes designed for deeper mathematical reasoning.';
+        }
+      });
+    </script>
   </body>
 </html>

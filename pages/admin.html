@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | StudyCore</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="top-bar">🛠️ Admin access — visible only to the StudyCore admin account.</div>
+      <nav class="navbar">
+        <div class="container nav-inner">
+          <a href="../index.html" class="nav-brand">
+            <img src="../assets/logo.jpg" alt="StudyCore Logo" />
+            <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
+          </a>
+          <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="documents.html">Documents</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="announcements.html">Announcements</a></li>
+            <li><a href="dashboard.html">Student View</a></li>
+            <li><a class="active" href="admin.html">Admin Dashboard</a></li>
+          </ul>
+          <div class="nav-actions">
+            <a class="btn btn-outline btn-sm" href="login.html">Log In</a>
+            <a class="btn btn-primary btn-sm" href="signup.html">Sign Up</a>
+          </div>
+        </div>
+      </nav>
+
+      <main class="page-main">
+        <section class="page-hero">
+          <div class="container">
+            <h1>Admin Dashboard</h1>
+            <p>Publish videos, documents, quizzes, and assignments, post announcements, and manage student accounts.</p>
+            <div id="adminGuardNotice" class="access-notice"></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div id="adminSummary" class="card-grid"></div>
+
+            <div class="card-grid" style="margin-top: 20px;">
+              <div class="info-card">
+                <h3>🎬 Publish Video</h3>
+                <form id="adminVideoForm" class="upload-form">
+                  <div class="form-group">
+                    <label for="videoTitle">Title</label>
+                    <input id="videoTitle" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="videoSubject">Subject</label>
+                    <input id="videoSubject" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="videoDescription">Description</label>
+                    <textarea id="videoDescription"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="videoLink">Video link (optional)</label>
+                    <input id="videoLink" type="text" placeholder="videos.html" />
+                  </div>
+                  <button class="btn btn-primary" type="submit">Publish Video</button>
+                </form>
+              </div>
+
+              <div class="info-card">
+                <h3>📄 Publish Document</h3>
+                <form id="adminDocumentForm" class="upload-form">
+                  <div class="form-group">
+                    <label for="documentTitle">Title</label>
+                    <input id="documentTitle" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="documentSubject">Subject</label>
+                    <input id="documentSubject" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="documentDescription">Description</label>
+                    <textarea id="documentDescription"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="documentLink">Document link (optional)</label>
+                    <input id="documentLink" type="text" placeholder="documents.html" />
+                  </div>
+                  <button class="btn btn-primary" type="submit">Publish Document</button>
+                </form>
+              </div>
+
+              <div class="info-card">
+                <h3>❓ Create Quiz</h3>
+                <form id="adminQuizForm" class="upload-form">
+                  <div class="form-group">
+                    <label for="quizTitle">Title</label>
+                    <input id="quizTitle" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="quizSubject">Subject</label>
+                    <input id="quizSubject" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="quizQuestions">Questions (JSON)</label>
+                    <textarea id="quizQuestions" placeholder='[{"prompt":"What is 2+2?","options":["3","4","5"],"answer":1}]' required></textarea>
+                  </div>
+                  <button class="btn btn-primary" type="submit">Publish Quiz</button>
+                </form>
+              </div>
+
+              <div class="info-card">
+                <h3>📝 Create Assignment</h3>
+                <form id="adminAssignmentForm" class="upload-form">
+                  <div class="form-group">
+                    <label for="assignmentTitle">Title</label>
+                    <input id="assignmentTitle" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="assignmentSubject">Subject</label>
+                    <input id="assignmentSubject" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="assignmentDescription">Description</label>
+                    <textarea id="assignmentDescription"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="assignmentDue">Due</label>
+                    <input id="assignmentDue" type="text" placeholder="Friday, or a date" required />
+                  </div>
+                  <button class="btn btn-primary" type="submit">Publish Assignment</button>
+                </form>
+              </div>
+
+              <div class="info-card">
+                <h3>📢 Post Announcement</h3>
+                <form id="adminAnnouncementForm" class="upload-form">
+                  <div class="form-group">
+                    <label for="announcementTitle">Title</label>
+                    <input id="announcementTitle" type="text" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="announcementDetail">Message</label>
+                    <textarea id="announcementDetail" required></textarea>
+                  </div>
+                  <button class="btn btn-primary" type="submit">Publish Announcement</button>
+                </form>
+              </div>
+            </div>
+
+            <div class="section-heading" style="margin-top: 36px;">
+              <h2>👥 Manage users</h2>
+              <p>Everyone here is automatically a student — only ronisherbwalya@gmail.com can ever be admin.</p>
+            </div>
+            <div id="adminUsersList" class="info-card"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/main.js" defer></script>
+    <script src="../js/admin.js" defer></script>
+  </body>
+</html>

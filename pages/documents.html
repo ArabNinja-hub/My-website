@@ -43,31 +43,72 @@
               <a class="btn btn-primary" href="videos.html">Watch Video Lessons</a>
               <button class="btn btn-outline" onclick="history.back()">← Back</button>
             </div>
+            <div id="accessNotice" class="access-notice"></div>
           </div>
         </section>
 
         <section class="section">
           <div class="container card-grid">
-            <div class="info-card">
+            <a class="info-card" href="subjects/mathematics.html">
               <h3>📘 Notes</h3>
               <p>Clear structured notes across every subject.</p>
-            </div>
-            <div class="info-card">
+            </a>
+            <a class="info-card" href="subjects/biology.html">
               <h3>📝 Assignments</h3>
               <p>Practice tasks for guided study and revision.</p>
-            </div>
-            <div class="info-card">
+            </a>
+            <a class="info-card" href="subjects/chemistry.html">
               <h3>🧠 Revision Packs</h3>
               <p>Short summaries and exam-focused resources for quick review.</p>
-            </div>
-            <div class="info-card">
+            </a>
+            <a class="info-card" href="subjects/physics.html">
               <h3>📚 Past Papers</h3>
               <p>Exam-style papers with answer guides.</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="section alt-section">
+          <div class="container">
+            <div class="section-heading">
+              <h2>Uploaded documents</h2>
+              <p>Any document you upload here appears as a clickable card for students.</p>
+            </div>
+            <div class="resource-grid" id="documentCards"></div>
+            <div class="upload-box">
+              <h3>Upload a new document</h3>
+              <form id="documentUploadForm" class="upload-form">
+                <div class="form-group">
+                  <label for="documentTitle">Title</label>
+                  <input id="documentTitle" type="text" placeholder="Revision notes for algebra" required />
+                </div>
+                <div class="form-group">
+                  <label for="documentDescription">Short description</label>
+                  <input id="documentDescription" type="text" placeholder="Useful for exam preparation" />
+                </div>
+                <div class="form-group">
+                  <label for="documentSubject">Subject</label>
+                  <select id="documentSubject">
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Communication">Communication</option>
+                    <option value="Programming">Programming</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="documentFile">Upload a file</label>
+                  <input id="documentFile" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt" />
+                </div>
+                <button class="btn btn-primary" type="submit">Publish document</button>
+              </form>
             </div>
           </div>
         </section>
       </main>
     </div>
+    <script src="../js/auth.js" defer></script>
     <script src="../js/main.js" defer></script>
   </body>
 </html>
