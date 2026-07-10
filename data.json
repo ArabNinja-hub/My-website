@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "admin-1",
+      "name": "Admin",
+      "email": "admin@studycore.com",
+      "password": "$2a$10$FOgC83ND7QYf4XRREzGP8emc1/EKUjnEa7OncqaYQaXMYU/Oo0a1.",
+      "role": "ADMIN",
+      "subscription": "premium",
+      "trialEnd": null,
+      "subscriptionStart": "2026-07-05T16:13:01.018Z",
+      "subscriptionEnd": "2027-07-05T16:13:01.020Z",
+      "createdAt": "2026-07-05T16:13:01.020Z"
+    }
+  ],
+  "videos": [],
+  "documents": [],
+  "quizzes": [],
+  "assignments": [],
+  "announcements": [],
+  "payments": []
+}
