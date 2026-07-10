@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chemistry | StudyCore</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="icon" type="image/jpeg" href="../../assets/logo.jpg" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="top-bar">🧪 Chemistry resources with notes, practicals, revision support, and quizzes.</div>
+      <nav class="navbar">
+        <div class="container nav-inner">
+          <a href="../../index.html" class="nav-brand">
+            <img src="../../assets/logo.jpg" alt="StudyCore Logo" />
+            <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
+          </a>
+          <ul class="nav-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../courses.html">Courses</a></li>
+            <li><a href="../documents.html">Documents</a></li>
+            <li><a href="../videos.html">Videos</a></li>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+          </ul>
+        </div>
+      </nav>
+      <main class="page-main">
+        <section class="page-hero">
+          <div class="container">
+            <h1>Chemistry</h1>
+            <p id="subjectIntro">Study atoms, reactions, compounds, practicals, and revision notes in one place.</p>
+            <div class="page-actions">
+              <a class="btn btn-primary" href="../documents.html">Open Documents</a>
+              <button class="btn btn-outline" onclick="history.back()">← Back</button>
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container card-grid" id="subjectCards">
+            <a class="info-card" href="../documents.html?subject=chemistry"><h3>📘 Notes & Past Papers</h3><p id="noteContent">Core topic summaries for chemical reactions and bonding.</p></a>
+            <a class="info-card" href="../videos.html?subject=chemistry"><h3>🎬 Videos</h3><p id="videoContent">Practical and theory-based lessons.</p></a>
+            <a class="info-card" href="../assignments.html?subject=chemistry"><h3>📝 Assignments</h3><p id="assignmentContent">Problem-solving tasks and lab-style exercises.</p></a>
+            <a class="info-card" href="../quizzes.html?subject=chemistry"><h3>🧠 Quizzes</h3><p id="quizContent">Quick knowledge checks for revision.</p></a>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="../../js/auth.js" defer></script>
+    <script src="../../js/main.js" defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const level = localStorage.getItem('studycore_current_user') ? JSON.parse(localStorage.getItem('studycore_current_user')).learningLevel || 'secondary' : 'secondary';
+        const intro = document.getElementById('subjectIntro');
+        const note = document.getElementById('noteContent');
+        const video = document.getElementById('videoContent');
+        const assignment = document.getElementById('assignmentContent');
+        const quiz = document.getElementById('quizContent');
+        if (level === 'tertiary') {
+          intro.textContent = 'Explore organic, inorganic, analytical, and physical chemistry with more advanced study support.';
+          note.textContent = 'In-depth notes on mechanisms, spectroscopy, and chemical analysis.';
+          video.textContent = 'Advanced practical and theory videos for tertiary chemistry learners.';
+          assignment.textContent = 'Lab-based and analytical assignments for advanced chemistry practice.';
+          quiz.textContent = 'Higher-level revision quizzes for chemistry mastery.';
+        }
+      });
+    </script>
+  </body>
+</html>

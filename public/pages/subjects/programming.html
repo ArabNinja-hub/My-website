@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Programming & Computer Science | StudyCore</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="icon" type="image/jpeg" href="../../assets/logo.jpg" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="top-bar">💻 Programming and computer science resources for practical learning.</div>
+      <nav class="navbar">
+        <div class="container nav-inner">
+          <a href="../../index.html" class="nav-brand">
+            <img src="../../assets/logo.jpg" alt="StudyCore Logo" />
+            <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
+          </a>
+          <ul class="nav-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../courses.html">Courses</a></li>
+            <li><a href="../documents.html">Documents</a></li>
+            <li><a href="../videos.html">Videos</a></li>
+            <li><a href="/dashboard.html">Dashboard</a></li>
+          </ul>
+        </div>
+      </nav>
+      <main class="page-main">
+        <section class="page-hero">
+          <div class="container">
+            <h1>Programming & Computer Science</h1>
+            <p id="subjectIntro">Learn programming basics, algorithms, problem solving, and computing concepts.</p>
+            <div class="page-actions">
+              <a class="btn btn-primary" href="../documents.html">Open Documents</a>
+              <button class="btn btn-outline" onclick="history.back()">← Back</button>
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container card-grid" id="subjectCards">
+            <a class="info-card" href="../documents.html?subject=programming"><h3>📘 Notes & Past Papers</h3><p id="noteContent">Programming theory, syntax, and key concepts.</p></a>
+            <a class="info-card" href="../videos.html?subject=programming"><h3>🎬 Videos</h3><p id="videoContent">Hands-on coding tutorials and walkthroughs.</p></a>
+            <a class="info-card" href="../assignments.html?subject=programming"><h3>📝 Assignments</h3><p id="assignmentContent">Code challenges and guided exercises.</p></a>
+            <a class="info-card" href="../quizzes.html?subject=programming"><h3>🧠 Quizzes</h3><p id="quizContent">Quick checks for programming understanding.</p></a>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="../../js/api.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/main.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', async () => {
+        await StudyCoreAuth.fetchSession();
+        StudyCoreAuth.updateAuthUI();
+        const user = StudyCoreAuth.getCurrentUser();
+        const subjectSlug = 'programming';
+        document.body.setAttribute('data-subject', 'programming');
+        if (user && user.learning_level === 'tertiary') {
+          const intro = document.getElementById('subjectIntro');
+          if (intro) intro.textContent = intro.textContent + ' (Showing tertiary-level framing where available.)';
+        }
+        ['subjectDocuments','subjectVideos','subjectAssignments','subjectQuizzes'].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.dataset.subjectFilter = 'programming';
+        });
+        renderResourceSection({ category: 'document', gridId: 'subjectDocuments', subject: subjectSlug });
+        renderResourceSection({ category: 'video', gridId: 'subjectVideos', subject: subjectSlug });
+        renderResourceSection({ category: 'assignment', gridId: 'subjectAssignments', subject: subjectSlug });
+        renderResourceSection({ category: 'quiz', gridId: 'subjectQuizzes', subject: subjectSlug });
+      });
+    </script>
+  </body>
+</html>

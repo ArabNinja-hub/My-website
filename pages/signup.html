@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | StudyCore</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="top-bar">🌟 Create a free account and start your learning journey with StudyCore.</div>
+      <nav class="navbar">
+        <div class="container nav-inner">
+          <a href="../index.html" class="nav-brand">
+            <img src="../assets/logo.jpg" alt="StudyCore Logo" />
+            <span class="nav-brand-text"><span>Study</span><span>Core</span></span>
+          </a>
+          <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="documents.html">Documents</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="announcements.html">Announcements</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <div class="nav-actions">
+            <a class="btn btn-outline btn-sm" href="login.html">Log In</a>
+          </div>
+        </div>
+      </nav>
+
+      <main class="page-main">
+        <section class="page-hero">
+          <div class="container">
+            <h1>Create Your Account</h1>
+            <p>Join StudyCore for free and get access to learning pages, resource libraries, and dashboards.</p>
+            <div class="page-actions">
+              <a class="btn btn-primary" href="login.html">Already have an account?</a>
+              <button class="btn btn-outline" onclick="history.back()">← Back</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="info-card" style="max-width:520px;margin:0 auto;">
+              <form id="signupForm">
+                <div class="form-group">
+                  <label for="signupName">Full Name</label>
+                  <input id="signupName" type="text" placeholder="Enter your full name" />
+                </div>
+                <div class="form-group">
+                  <label for="signupEmail">Email</label>
+                  <input id="signupEmail" type="email" placeholder="student@example.com" />
+                </div>
+                <div class="form-group">
+                  <label for="signupPassword">Password</label>
+                  <input id="signupPassword" type="password" placeholder="Create a strong password" />
+                </div>
+                <div class="form-group">
+                  <label for="signupLevel">Learning level</label>
+                  <select id="signupLevel">
+                    <option value="secondary">Secondary school</option>
+                    <option value="tertiary">Tertiary / university</option>
+                  </select>
+                </div>
+                <button class="btn btn-primary" type="submit">Create Free Account</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/main.js" defer></script>
+  </body>
+</html>

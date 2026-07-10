@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In | StudyCore</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <nav class="navbar">
+        <div class="container nav-inner">
+          <a href="index.html" class="nav-brand"><span>Study</span><span>Core</span></a>
+        </div>
+      </nav>
+      <main class="page-main">
+        <section class="section">
+          <div class="container" style="max-width: 480px; margin: 60px auto;">
+            <div class="info-card">
+              <h2>Welcome back</h2>
+              <p>Log in to continue to your dashboard.</p>
+              <form id="loginForm" class="upload-form" novalidate>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" required autocomplete="email" />
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input id="password" type="password" required autocomplete="current-password" minlength="6" />
+                </div>
+                <div id="loginError" style="color:#D64545;display:none;font-size:0.9rem;"></div>
+                <button class="btn btn-primary" type="submit" id="loginSubmitBtn">Log In</button>
+              </form>
+              <p style="margin-top: 12px;">Don't have an account? <a href="signup.html">Create one</a></p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="js/api.js"></script>
+    <script>
+      const form = document.getElementById('loginForm');
+      const errorBox = document.getElementById('loginError');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorBox.style.display = 'none';
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        if (!email || !password) return;
+        const btn = document.getElementById('loginSubmitBtn');
+        btn.disabled = true;
+        btn.textContent = 'Logging in...';
+        try {
+          const data = await StudyCoreAPI.login({ email, password });
+          window.location.href = data.user.role === 'ADMIN' ? '/admin.html' : '/dashboard.html';
+        } catch (err) {
+          errorBox.textContent = err.message;
+          errorBox.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Log In';
+        }
+      });
+    </script>
+  </body>
+</html>
